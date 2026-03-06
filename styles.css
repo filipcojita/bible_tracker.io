@@ -1,0 +1,21 @@
+body {
+    background: #111;
+    color: white;
+    text-align: center;
+    font-family: Arial;
+}
+
+.qr img {
+    width: 400px;
+}
+
+.big {
+    font-size: 48px;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+.count {
+    font-size: 32px;
+    margin-top: 20px;
+}
