@@ -1,9 +1,12 @@
 /* base styles for site */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
 body {
-    background: #f8f9fa; /* light background for landing page */
+    background: #f8f9fa;
     color: #212529;
     text-align: left;
-    font-family: Arial, sans-serif;
+    font-family: 'Roboto', Arial, sans-serif;
+    line-height: 1.6;
 }
 
 .hero {
@@ -12,7 +15,7 @@ body {
     color: white;
     padding: 120px 0;
     position: relative;
-    text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+    text-shadow: 0 2px 4px rgba(0,0,0,0.7);
 }
 
 .hero::after {
@@ -22,12 +25,24 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0,0,0,0.5);
+    background: linear-gradient(135deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3));
 }
 
 .hero .container {
     position: relative;
     z-index: 1;
+}
+
+section {
+    padding: 60px 0;
+}
+
+.card {
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
 }
 
 .qr img {

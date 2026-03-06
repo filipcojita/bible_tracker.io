@@ -10,6 +10,7 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ACASA Tineret - #tineretSperanta</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -36,54 +37,70 @@ session_start();
 <!-- hero section -->
 <header class="hero" style="background-image:url('images/hero.jpeg');">
     <div class="container text-center">
-        <h1 class="display-4">Bun venit ACASĂ!</h1>
-        <p class="lead">#tineretSperanta - comunitatea tinerilor din Biserica Baptistă Speranța Arad</p>
+        <h1 class="display-4 fw-bold">Bun venit ACASĂ!</h1>
+        <p class="lead mb-4">#tineretSperanta - comunitatea tinerilor din Biserica Baptistă Speranța Arad</p>
+        <a href="#bibletracker" class="btn btn-light btn-lg shadow">Catre Bible Tracker</a>
     </div>
 </header>
 
 <main>
     <section id="about" class="py-5">
         <div class="container">
-            <h2>Despre noi</h2>
-            <p>ACASA este grupul de tineri al Bisericii Speranța. Ne întâlnim pentru a studia Cuvântul, a ne ruga împreună și a construi relații bazate pe credință și prietenie. Fie că ești nou sau ai fost cu noi de mult timp, ești binevenit.</p>
-            <img src="images/stage.jpeg" class="img-fluid rounded mt-3" alt="Tineri ACASA">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h2 class="mb-4"><i class="fas fa-users text-primary me-2"></i>Despre noi</h2>
+                    <p class="lead">ACASA este grupul de tineri al Bisericii Speranța. Ne întâlnim pentru a studia Cuvântul, a ne ruga împreună și a construi relații bazate pe credință și prietenie. Fie că ești nou sau ai fost cu noi de mult timp, ești binevenit.</p>
+                </div>
+                <div class="col-lg-6">
+                    <img src="images/stage.jpeg" class="img-fluid rounded shadow" alt="Tineri ACASA">
+                </div>
+            </div>
         </div>
     </section>
 
     <section id="mission" class="py-5 bg-light">
-        <div class="container">
-            <h2>Misiunea noastră</h2>
-            <p>Ne propunem să creștem spiritual, să fim lumină în comunitate și să încurajăm tinerii să-și trăiască credința dincolo de zidurile bisericii.</p>
+        <div class="container text-center">
+            <h2 class="mb-4"><i class="fas fa-cross text-primary me-2"></i>Misiunea noastră</h2>
+            <p class="lead">Ne propunem să creștem spiritual, să fim lumină în comunitate și să încurajăm tinerii să-și trăiască credința dincolo de zidurile bisericii.</p>
         </div>
     </section>
 
     <section id="when" class="py-5">
-        <div class="container">
-            <h2>Când ne întâlnim</h2>
-            <p>Ne vedem în fiecare vineri seara, de la 19:00 în sala de tineret a bisericii (Strada Iustin Marsieu nr. 20). Uneori organizăm activități speciale în weekend.</p>
+        <div class="container text-center">
+            <h2 class="mb-4"><i class="fas fa-clock text-primary me-2"></i>Când ne întâlnim</h2>
+            <p class="lead">Ne vedem în fiecare vineri seara, de la 19:00 în sala de tineret a bisericii (Strada Iustin Marsieu nr. 20). Uneori organizăm activități speciale în weekend.</p>
         </div>
     </section>
 
     <section id="activities" class="py-5 bg-light">
         <div class="container">
-            <h2>Ce facem</h2>
-            <ul class="list-unstyled">
-                <li>&#8226; Studii biblice, discuții, închinare prin muzică</li>
-                <li>&#8226; Serie de întrebări și răspunsuri</li>
-                <li>&#8226; Jocuri, mese comune și activități de voluntariat</li>
-            </ul>
-            <img src="images/poland.jpeg" class="img-fluid rounded mt-3" alt="Activități ACASA">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h2 class="mb-4"><i class="fas fa-pray text-primary me-2"></i>Ce facem</h2>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><i class="fas fa-book-open text-secondary me-2"></i> Studii biblice, discuții, închinare prin muzică</li>
+                        <li class="mb-2"><i class="fas fa-question-circle text-secondary me-2"></i> Serie de întrebări și răspunsuri</li>
+                        <li class="mb-2"><i class="fas fa-gamepad text-secondary me-2"></i> Jocuri, mese comune și activități de voluntariat</li>
+                    </ul>
+                </div>
+                <div class="col-lg-6">
+                    <img src="images/poland.jpeg" class="img-fluid rounded shadow" alt="Activități ACASA">
+                </div>
+            </div>
         </div>
     </section>
 
-    <section id="bibletracker" class="py-5">
+    <section id="bibletracker" class="py-5 bg-primary text-white">
         <div class="container">
-            <h2>Bible Tracker</h2>
-            <p>Urmărește-ți citirile biblice zilnice, reflectează și crește împreună cu noi. Această unealtă rămâne o parte centrală a programului nostru.</p>
-            <div class="row">
+            <div class="text-center mb-5">
+                <h2 class="mb-4"><i class="fas fa-bible text-white me-2"></i>Bible Tracker</h2>
+                <p class="lead">Urmărește-ți citirile biblice zilnice, reflectează și crește împreună cu noi. Această unealtă rămâne o parte centrală a programului nostru.</p>
+            </div>
+            <div class="row justify-content-center">
                 <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-                    <div class="card">
-                        <div class="card-body">
+                    <div class="card border-0 shadow">
+                        <div class="card-body text-center text-dark">
+                            <i class="fas fa-sign-in-alt fa-2x text-primary mb-3"></i>
                             <h5 class="card-title">Autentificare</h5>
                             <p class="card-text">Ești deja membru? Autentifică-te pentru a trimite citirile biblice și a-ți urmări progresul.</p>
                             <a href="login.php" class="btn btn-primary">Autentifică-te</a>
@@ -92,8 +109,9 @@ session_start();
                 </div>
 
                 <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-                    <div class="card">
-                        <div class="card-body">
+                    <div class="card border-0 shadow">
+                        <div class="card-body text-center text-dark">
+                            <i class="fas fa-user-plus fa-2x text-success mb-3"></i>
                             <h5 class="card-title">Înregistrează-te</h5>
                             <p class="card-text">Nou aici? Înscrie-te pentru a începe să trimiți reflecțiile biblice și a te alătura grupului.</p>
                             <a href="register.php" class="btn btn-secondary">Înregistrează-te</a>
@@ -102,8 +120,9 @@ session_start();
                 </div>
 
                 <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-                    <div class="card">
-                        <div class="card-body">
+                    <div class="card border-0 shadow">
+                        <div class="card-body text-center text-dark">
+                            <i class="fas fa-trophy fa-2x text-warning mb-3"></i>
                             <h5 class="card-title">Clasament</h5>
                             <p class="card-text">Cum te plasezi în grupul tău? Vezi utilizatorii de top pe baza activitatii lor.</p>
                             <a href="leaderboard.php" class="btn btn-info">Vezi Clasamentul</a>
@@ -111,16 +130,25 @@ session_start();
                     </div>
                 </div>
             </div>
-            <div class="alert alert-warning mt-4" role="alert">
-                Nu uita să trimiți citirile biblice zilnice! Ai o fereastră de 3 zile pentru a recupera.
+            <div class="alert alert-light mt-4" role="alert">
+                <i class="fas fa-exclamation-triangle me-2"></i>Nu uita să trimiți citirile biblice zilnice! Ai o fereastră de 3 zile pentru a recupera.
             </div>
         </div>
     </section>
 </main>
 
-<footer class="bg-dark text-white py-3">
-    <div class="container text-center">
-        <p>&copy; 2025 ACASA Tineret / Bible Tracker. Toate drepturile rezervate.</p>
+<footer class="bg-dark text-white py-4">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h5>ACASĂ #tineretSperanta</h5>
+                <p>#tineretSperanta - Biserica Baptistă Speranța Arad</p>
+            </div>
+            <div class="col-md-6 text-md-end">
+                <p>Contact: <a href="mailto:contact@exemplu.ro" class="text-light">Ruben: 0731615153</a></p>
+                <p>&copy; 2026 ACASĂ #tineretSperanta / Bible Tracker. Toate drepturile rezervate.</p>
+            </div>
+        </div>
     </div>
 </footer>
 
