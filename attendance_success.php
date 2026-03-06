@@ -10,6 +10,7 @@
 <body class="bg-light">
 
 <div class="container text-center mt-5">
+    <img src="images/success.jpg" alt="Confirmare" class="img-fluid mb-4" style="max-width:300px;">
     <h1 class="text-success">Prezență înregistrată!</h1>
     <p>Ai primit un punct de prezență.</p>
 </div>

@@ -64,6 +64,35 @@ margin-top:20px;
 font-size:26px;
 }
 
+.feed-container{
+    width:300px;
+    max-height:500px;
+    overflow:hidden;
+    position:relative;
+}
+
+.feed-box{
+    height:400px;
+    overflow:hidden;
+    /* allow opacity transitions for fade-out/in */
+    transition: opacity 0.8s ease;
+}
+
+.feed-list{
+    list-style:none;
+    font-size:28px;
+    margin:0;
+    padding:0;
+    animation: scrollUp 20s linear infinite;
+}
+
+@keyframes scrollUp {
+    0% { transform: translateY(100%); opacity:0; }
+    10% { opacity:1; }
+    90% { opacity:1; }
+    100% { transform: translateY(-100%); opacity:0; }
+}
+
 </style>
 
 </head>
@@ -77,37 +106,33 @@ font-size:26px;
 ⏰ <?php echo $current_time; ?>
 </div>
 
-<div class="qr">
-<img id="qr">
-</div>
+<div class="d-flex justify-content-center align-items-start mt-4" style="gap:2rem;flex-wrap:wrap;">
+    <div class="qr">
+        <img id="qr">
+        <div class="big mt-3">
+        <?php
+        if($status=="early"){
+            echo "Check-in începe la 18:45";
+        }
+        if($status=="open"){
+            echo "Scanează pentru prezență";
+        }
+        if($status=="late"){
+            echo "Check-in închis";
+        }
+        ?>
+        </div>
+        <div class="count mt-3">
+            Prezenți: <span id="count">0</span>
+        </div>
+    </div>
 
-<div class="big">
-
-<?php
-
-if($status=="early"){
-echo "Check-in începe la 18:45";
-}
-
-if($status=="open"){
-echo "Scanează pentru prezență";
-}
-
-if($status=="late"){
-echo "Check-in închis";
-}
-
-?>
-
-</div>
-
-<div class="count">
-Prezenți: <span id="count">0</span>
-</div>
-
-<div class="mt-5">
-<h2>Ultimii sosiți</h2>
-<ul id="feed" style="list-style:none;font-size:28px;"></ul>
+    <div class="feed-container">
+        <h2>Ultimii sosiți</h2>
+        <div class="feed-box">
+            <ul id="feed" class="feed-list"></ul>
+        </div>
+    </div>
 </div>
 
 <script>
@@ -118,7 +143,7 @@ fetch("generate_token.php")
 .then(r=>r.text())
 .then(token=>{
 
-let url = "http://localhost/bible_tracker/attendance.php?token="+token;
+let url = "https://tineretsperanta.net/attendance.php?token="+token;
 
 let qr = "https://api.qrserver.com/v1/create-qr-code/?size=400x400&data="+encodeURIComponent(url);
 
@@ -139,25 +164,37 @@ document.getElementById("count").innerText=data;
 }
 
 function updateFeed(){
+    const box = document.querySelector('.feed-box');
+    const feed = document.getElementById("feed");
+    const oldHtml = feed.innerHTML;
 
-fetch("attendance_feed.php")
-.then(r=>r.json())
-.then(data=>{
+    fetch("attendance_feed.php")
+    .then(r=>r.json())
+    .then(data=>{
+        let html="";
+        data.forEach(item=>{
+            let time=item.created_at.split(" ")[1].substring(0,5);
+            html += `<li>${item.username} - ${time}</li>`;
+        });
 
-let html="";
+        if(html === oldHtml) {
+            // no change, do nothing
+            return;
+        }
 
-data.forEach(item=>{
-
-let time=item.created_at.split(" ")[1].substring(0,5);
-
-html += `<li>${item.username} - ${time}</li>`;
-
-});
-
-document.getElementById("feed").innerHTML=html;
-
-});
-
+        // content changed - perform fade
+        box.style.opacity = 0;
+        setTimeout(() => {
+            feed.innerHTML = html;
+            // restart scroll animation smoothly
+            feed.style.animation = 'none';
+            requestAnimationFrame(()=>{
+                feed.style.animation = 'scrollUp 20s linear infinite';
+            });
+            // fade back in
+            box.style.opacity = 1;
+        }, 800); // match transition duration
+    });
 }
 
 function updateClock(){
