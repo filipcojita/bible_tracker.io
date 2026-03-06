@@ -1,8 +1,33 @@
+/* base styles for site */
 body {
-    background: #111;
+    background: #f8f9fa; /* light background for landing page */
+    color: #212529;
+    text-align: left;
+    font-family: Arial, sans-serif;
+}
+
+.hero {
+    background-size: cover;
+    background-position: top;
     color: white;
-    text-align: center;
-    font-family: Arial;
+    padding: 120px 0;
+    position: relative;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+}
+
+.hero::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.5);
+}
+
+.hero .container {
+    position: relative;
+    z-index: 1;
 }
 
 .qr img {

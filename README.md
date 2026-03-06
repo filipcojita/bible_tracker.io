@@ -1,11 +1,16 @@
 ﻿# bible_tracker
-This website was created in order help our youth ministrys discount program for the 2025 camp.
-Youths have to read their Bible every day and write something about what they read that day.
-There is a 3-day window to complete a day.
-Each completed day has a 2 RON discount for the general price of the camp.
-There is a login page, a submit page, a home page, a leaderboard page (top 10 and user placement), and a (private) admin page
-All user data and submission data is synced with a myphpadmin sql database.
+This website was created to support the youth ministry of Biserica Speranța – **ACASA (#tineretSperanta)**. The index page now serves as a landing page presenting our group, mission, meeting times and activities, while still providing access to the Bible Tracker functionality.
+
+**Bible Tracker feature:**
+- Young people read the Bible every day and submit a brief reflection.
+- There is a 3‑day window to complete a day.
+- Each completed day earns a 2 RON discount on the camp price.
+- Login / registration, submission, leaderboard and admin pages remain unchanged and continue to work.
+
+All user and submission data are stored in a MySQL database (phpMyAdmin). 
+
 Website is hosted on Hostinger at tineretsperanta.net until the end of 2025.
+
 Project done by me, with the help of AI.
 
 visit tineretsperanta.net for more details
