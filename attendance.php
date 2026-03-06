@@ -19,6 +19,22 @@ function showMessage($message, $imageFile) {
     exit;
 }
 
+// helper to get a random image from a folder
+function getRandomImage($folder) {
+    $dir = __DIR__ . "/images/" . $folder;
+    if (!is_dir($dir)) {
+        return "success.jpg"; // fallback
+    }
+    $files = array_diff(scandir($dir), array('.', '..'));
+    $images = array_filter($files, function($file) {
+        return preg_match('/\.(jpg|jpeg|png|gif)$/i', $file);
+    });
+    if (empty($images)) {
+        return "success.jpg"; // fallback
+    }
+    return $folder . "/" . $images[array_rand($images)];
+}
+
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit();
@@ -27,7 +43,7 @@ if (!isset($_SESSION['user_id'])) {
 $user_id = $_SESSION['user_id'];
 
 if (!isset($_GET['token'])) {
-    showMessage("Cod QR invalid.", "too_early.png");
+    showMessage("Cod QR invalid.", getRandomImage("too_late"));
 }
 
 $secret = "bibletracker_secret_key";
@@ -49,7 +65,7 @@ for ($i = -1; $i <= 1; $i++) {
 }
 
 if (!$valid) {
-    showMessage("Cod QR expirat. Scanează din nou.", "too_early.png");
+    showMessage("Cod QR expirat. Scanează din nou.", getRandomImage("too_late"));
 }
 
 $current_time = date("H:i");
@@ -58,11 +74,11 @@ $start = "18:45";
 $end = "19:15";
 
 if ($current_time < $start) {
-    showMessage("Ai ajuns prea devreme. Așteaptă până la 18:45.", "too_early.png");
+    showMessage("Ai ajuns prea devreme. Așteaptă până la 18:45.", getRandomImage("too_late"));
 }
 
 if ($current_time > $end) {
-    showMessage("Ai ajuns prea târziu. Încearcă vinerea viitoare.", "too_late.jpg");
+    showMessage("Ai ajuns prea târziu. Încearcă vinerea viitoare.", getRandomImage("too_late"));
 }
 
 $current_date = date("Y-m-d");
@@ -73,13 +89,13 @@ $stmt->execute();
 $result = $stmt->get_result();
 
 if ($result->num_rows > 0) {
-    showMessage("Prezența este deja înregistrată.", "too_late.jpg");
+    showMessage("Prezența este deja înregistrată.", getRandomImage("too_late"));
 }
 
 $stmt = $conn->prepare("INSERT INTO attendance (user_id, date) VALUES (?, ?)");
 $stmt->bind_param("is", $user_id, $current_date);
 $stmt->execute();
 
-header("Location: attendance_success.php");
+showMessage("Prezența înregistrată cu succes!", getRandomImage("on_time"));
 exit();
 ?>
