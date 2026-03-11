@@ -59,3 +59,49 @@ section {
     font-size: 32px;
     margin-top: 20px;
 }
+
+/* Leaderboard styling */
+
+.leaderboard-table {
+    font-size: 18px;
+}
+
+.rank {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+/* Medal colors */
+
+/* apply to row and each cell; helps override Bootstrap's cell backgrounds */
+.leaderboard-table tbody tr.gold,
+.leaderboard-table tbody tr.gold td {
+    background: linear-gradient(90deg,#fff8dc,#ffd70033) !important;
+    font-weight: 600;
+}
+
+.leaderboard-table tbody tr.silver,
+.leaderboard-table tbody tr.silver td {
+    background: linear-gradient(90deg,#f8f9fa,#c0c0c033) !important;
+    font-weight: 600;
+}
+
+.leaderboard-table tbody tr.bronze,
+.leaderboard-table tbody tr.bronze td {
+    background: linear-gradient(90deg,#fdf6ec,#cd7f3233) !important;
+    font-weight: 600;
+}
+
+/* Logged user highlight */
+
+.current-user {
+    border-left: 6px solid #1e8035;
+    background-color: #e9f9ee !important;
+}
+
+/* Slight hover effect */
+
+.leaderboard-table tbody tr:hover {
+    transform: scale(1.01);
+    transition: 0.15s;
+}

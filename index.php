@@ -8,7 +8,7 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ACASA Tineret - #tineretSperanta</title>
+    <title>#tineretSperanta - ACASĂ</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
@@ -18,7 +18,7 @@ session_start();
 <!-- navigation -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
-        <a class="navbar-brand" href="#">ACASA #tineretSperanta</a>
+        <a class="navbar-brand" href="#">#tineretSperanta - ACASĂ</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -49,7 +49,7 @@ session_start();
             <div class="row align-items-center">
                 <div class="col-lg-6">
                     <h2 class="mb-4"><i class="fas fa-users text-primary me-2"></i>Despre noi</h2>
-                    <p class="lead">ACASA este grupul de tineri al Bisericii Speranța. Ne întâlnim pentru a studia Cuvântul, a ne ruga împreună și a construi relații bazate pe credință și prietenie. Fie că ești nou sau ai fost cu noi de mult timp, ești binevenit.</p>
+                    <p class="lead">ACASĂ este grupul de tineri al Bisericii Speranța. Ne întâlnim pentru a studia Cuvântul, a ne ruga împreună și a construi relații bazate pe credință și prietenie. Fie că ești nou sau ai fost cu noi de mult timp, ești binevenit.</p>
                 </div>
                 <div class="col-lg-6">
                     <img src="images/stage.jpeg" class="img-fluid rounded shadow" alt="Tineri ACASA">
@@ -97,38 +97,53 @@ session_start();
                 <p class="lead">Urmărește-ți citirile biblice zilnice, reflectează și crește împreună cu noi. Această unealtă rămâne o parte centrală a programului nostru.</p>
             </div>
             <div class="row justify-content-center">
-                <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-                    <div class="card border-0 shadow">
-                        <div class="card-body text-center text-dark">
-                            <i class="fas fa-sign-in-alt fa-2x text-primary mb-3"></i>
-                            <h5 class="card-title">Autentificare</h5>
-                            <p class="card-text">Ești deja membru? Autentifică-te pentru a trimite citirile biblice și a-ți urmări progresul.</p>
-                            <a href="login.php" class="btn btn-primary">Autentifică-te</a>
+                <?php if (isset($_SESSION['user_id'])): ?>
+                    <!-- Logged-in user view -->
+                    <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                        <div class="card border-0 shadow">
+                            <div class="card-body text-center text-dark">
+                                <i class="fas fa-tachometer-alt fa-2x text-success mb-3"></i>
+                                <h5 class="card-title">Bun venit, <?php echo htmlspecialchars($_SESSION['username']); ?>!</h5>
+                                <p class="card-text">Accesează panoul tau pentru a gestiona citirile biblice și a-ți urmări progresul.</p>
+                                <a href="dashboard.php" class="btn btn-success btn-lg">Mergi la Panou</a>
+                            </div>
                         </div>
                     </div>
-                </div>
+                <?php else: ?>
+                    <!-- Non-logged-in user view -->
+                    <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                        <div class="card border-0 shadow">
+                            <div class="card-body text-center text-dark">
+                                <i class="fas fa-sign-in-alt fa-2x text-primary mb-3"></i>
+                                <h5 class="card-title">Autentificare</h5>
+                                <p class="card-text">Ești deja membru? Autentifică-te pentru a trimite citirile biblice și a-ți urmări progresul.</p>
+                                <a href="login.php" class="btn btn-primary">Autentifică-te</a>
+                            </div>
+                        </div>
+                    </div>
 
-                <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-                    <div class="card border-0 shadow">
-                        <div class="card-body text-center text-dark">
-                            <i class="fas fa-user-plus fa-2x text-success mb-3"></i>
-                            <h5 class="card-title">Înregistrează-te</h5>
-                            <p class="card-text">Nou aici? Înscrie-te pentru a începe să trimiți reflecțiile biblice și a te alătura grupului.</p>
-                            <a href="register.php" class="btn btn-secondary">Înregistrează-te</a>
+                    <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                        <div class="card border-0 shadow">
+                            <div class="card-body text-center text-dark">
+                                <i class="fas fa-user-plus fa-2x text-success mb-3"></i>
+                                <h5 class="card-title">Înregistrează-te</h5>
+                                <p class="card-text">Nou aici? Înscrie-te pentru a începe să trimiți reflecțiile biblice și a te alătura grupului.</p>
+                                <a href="register.php" class="btn btn-secondary">Înregistrează-te</a>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
-                    <div class="card border-0 shadow">
-                        <div class="card-body text-center text-dark">
-                            <i class="fas fa-trophy fa-2x text-warning mb-3"></i>
-                            <h5 class="card-title">Clasament</h5>
-                            <p class="card-text">Cum te plasezi în grupul tău? Vezi utilizatorii de top pe baza activitatii lor.</p>
-                            <a href="leaderboard.php" class="btn btn-info">Vezi Clasamentul</a>
+                    <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                        <div class="card border-0 shadow">
+                            <div class="card-body text-center text-dark">
+                                <i class="fas fa-trophy fa-2x text-warning mb-3"></i>
+                                <h5 class="card-title">Clasament</h5>
+                                <p class="card-text">Cum se află alți utilizatori? Vezi pe cei mai activi pe baza activitatii lor.</p>
+                                <a href="leaderboard.php" class="btn btn-info">Vezi Clasamentul</a>
+                            </div>
                         </div>
                     </div>
-                </div>
+                <?php endif; ?>
             </div>
             <div class="alert alert-light mt-4" role="alert">
                 <i class="fas fa-exclamation-triangle me-2"></i>Nu uita să trimiți citirile biblice zilnice! Ai o fereastră de 3 zile pentru a recupera.

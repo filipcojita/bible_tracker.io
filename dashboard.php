@@ -106,10 +106,16 @@ while ($row = $result->fetch_assoc()) {
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto">
+            <ul class="navbar-nav ms-auto align-items-center">
                 <li class="nav-item">
+                    <a class="nav-link" href="index.php">Acasă</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="leaderboard.php">Clasament</a>
+                </li>
+                <li class="nav-item me-3">
                     <span class="navbar-text welcome-message">
-                        Bine ai venit, <?= htmlspecialchars($username) ?>!
+                        <?= htmlspecialchars($username) ?>
                     </span>
                 </li>
                 <li class="nav-item">
@@ -121,43 +127,41 @@ while ($row = $result->fetch_assoc()) {
 </nav>
 
 <div class="container mt-4">
-    <h2>Submit Your Bible Reading</h2>
+    <h2>Înregistrează-ți meditația biblică de astăzi</h2>
 
     <!-- Submission Form -->
     <form method="post" class="form-group">
         <div class="mb-3">
-            <label for="date" class="form-label">Select Date:</label>
+            <label for="date" class="form-label">Selectează Data:</label>
             <input type="date" name="date" id="date-picker" max="<?= $today ?>" class="form-control" required>
         </div>
         <div class="mb-3">
-            <label for="passage" class="form-label">Bible Passage:</label>
+            <label for="passage" class="form-label">Pasaj Biblic:</label>
             <input type="text" name="passage" class="form-control" required>
         </div>
         <div class="mb-3">
-            <label for="reflection" class="form-label">Reflection:</label>
+            <label for="reflection" class="form-label">Reflecție: (Cu ce ai rămas?)</label>
             <textarea name="reflection" class="form-control" required></textarea>
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary">Trimite</button>
     </form>
 
     <!-- User Past Submissions -->
-    <h3 class="mt-4">Your Past Submissions:</h3>
+    <h3 class="mt-4">Înregistrări anterioare:</h3>
     <div class="submitted-dates">
         <ul>
             <?php foreach ($submitted_dates as $date): ?>
-                <li><strong><?= htmlspecialchars($date) ?></strong></li>
+                <li><strong><?= htmlspecialchars(date('d-m-Y', strtotime($date))) ?></strong></li>
             <?php endforeach; ?>
         </ul>
     </div>
 
-    <!-- Leaderboard and Logout -->
-    <a href="leaderboard.php" class="btn btn-info">View Leaderboard</a>
+    <!-- Leaderboard and Admin Panel -->
+    <a href="leaderboard.php" class="btn btn-info">Vezi Clasamentul</a>
 
 <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
-    <a href="admin.php" class="btn btn-warning">Admin Panel</a>
+    <a href="admin.php" class="btn btn-warning">Panou Admin</a>
 <?php endif; ?>
-
-<a href="logout.php" class="btn btn-danger">Deconectează-te</a>
 
 </div>
 
@@ -169,7 +173,7 @@ while ($row = $result->fetch_assoc()) {
 
     datePicker.addEventListener("change", function() {
         if (submittedDates.includes(this.value)) {
-            alert("❌ You already submitted for this day.");
+            alert("❌ Ai trimis deja astăzi.");
             this.value = ""; // Clear the selected date
         }
     });
