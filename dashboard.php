@@ -76,6 +76,7 @@ $show_all_button = count($submitted_dates) > 5;
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bible Tracker - Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
     <style>
         .navbar {
             margin-bottom: 20px;
@@ -113,10 +114,10 @@ $show_all_button = count($submitted_dates) > 5;
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto align-items-center">
                 <li class="nav-item">
-                    <a class="nav-link" href="index.php">Acasă</a>
+                    <a class="nav-link" href="index.php"><i class="bi bi-house"></i> Acasă</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="leaderboard.php">Clasament</a>
+                    <a class="nav-link" href="leaderboard.php"><i class="bi bi-trophy"></i> Clasament</a>
                 </li>
                 <li class="nav-item me-3">
                     <span class="navbar-text welcome-message">
@@ -124,7 +125,7 @@ $show_all_button = count($submitted_dates) > 5;
                     </span>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="logout.php">Deconectează-te</a>
+                    <a class="nav-link" href="logout.php"><i class="bi bi-box-arrow-right"></i> Deconectează-te</a>
                 </li>
             </ul>
         </div>
@@ -148,7 +149,7 @@ $show_all_button = count($submitted_dates) > 5;
             <label for="reflection" class="form-label">Reflecție: (Cu ce ai rămas?)</label>
             <textarea name="reflection" class="form-control" required></textarea>
         </div>
-        <button type="submit" class="btn btn-primary">Trimite</button>
+        <button type="submit" class="btn btn-primary"><i class="bi bi-send"></i> Trimite</button>
     </form>
 
     <!-- User Past Submissions -->
@@ -163,12 +164,13 @@ $show_all_button = count($submitted_dates) > 5;
 
     <!-- Leaderboard and Admin Panel -->
     <?php if ($show_all_button): ?>
-        <button id="toggle-submissions-btn" class="btn btn-secondary me-2">Arată toate</button>
+        <button id="toggle-submissions-btn" class="btn btn-secondary me-2"><i class="bi bi-eye"></i> Arată toate</button>
     <?php endif; ?>
-    <a href="leaderboard.php" class="btn btn-info">Vezi Clasamentul</a>
+    <a href="qr_scanner.php" class="btn btn-success me-2"><i class="bi bi-camera"></i> Deschide Cameră</a>
+    <a href="leaderboard.php" class="btn btn-info"><i class="bi bi-trophy"></i> Vezi Clasamentul</a>
 
 <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
-    <a href="admin.php" class="btn btn-warning">Panou Admin</a>
+    <a href="admin.php" class="btn btn-warning"><i class="bi bi-gear"></i> Panou Admin</a>
 <?php endif; ?>
 
 </div>
@@ -195,11 +197,11 @@ $show_all_button = count($submitted_dates) > 5;
         toggleBtn.addEventListener('click', function() {
             if (isShowingAll) {
                 hiddenItems.forEach(item => item.classList.add('hidden'));
-                this.textContent = 'Arată toate';
+                this.innerHTML = '<i class="bi bi-eye"></i> Arată toate';
                 isShowingAll = false;
             } else {
                 hiddenItems.forEach(item => item.classList.remove('hidden'));
-                this.textContent = 'Ascunde';
+                this.innerHTML = '<i class="bi bi-eye-slash"></i> Ascunde';
                 isShowingAll = true;
             }
         });
