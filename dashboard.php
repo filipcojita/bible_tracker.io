@@ -55,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 // Fetch submitted dates for this user
-$sql = "SELECT date FROM submissions WHERE user_id = ?";
+$sql = "SELECT date FROM submissions WHERE user_id = ? ORDER BY date DESC";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $user_id);
 $stmt->execute();
@@ -65,6 +65,8 @@ $submitted_dates = [];
 while ($row = $result->fetch_assoc()) {
     $submitted_dates[] = $row['date'];
 }
+
+$show_all_button = count($submitted_dates) > 5;
 ?>
 
 <!DOCTYPE html>
@@ -92,6 +94,9 @@ while ($row = $result->fetch_assoc()) {
             margin: 5px 0;
             padding: 10px;
             border-radius: 5px;
+        }
+        .hidden {
+            display: none;
         }
     </style>
 </head>
@@ -150,13 +155,16 @@ while ($row = $result->fetch_assoc()) {
     <h3 class="mt-4">Înregistrări anterioare:</h3>
     <div class="submitted-dates">
         <ul>
-            <?php foreach ($submitted_dates as $date): ?>
-                <li><strong><?= htmlspecialchars(date('d-m-Y', strtotime($date))) ?></strong></li>
-            <?php endforeach; ?>
+            <?php $count = 0; foreach ($submitted_dates as $date): ?>
+                <li class="submission-item <?php if ($count >= 5) echo 'hidden'; ?>"><strong><?= htmlspecialchars(date('d-M-Y', strtotime($date))) ?></strong></li>
+            <?php $count++; endforeach; ?>
         </ul>
     </div>
 
     <!-- Leaderboard and Admin Panel -->
+    <?php if ($show_all_button): ?>
+        <button id="toggle-submissions-btn" class="btn btn-secondary me-2">Arată toate</button>
+    <?php endif; ?>
     <a href="leaderboard.php" class="btn btn-info">Vezi Clasamentul</a>
 
 <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
@@ -177,6 +185,25 @@ while ($row = $result->fetch_assoc()) {
             this.value = ""; // Clear the selected date
         }
     });
+
+    // Toggle show/hide submissions button
+    let toggleBtn = document.getElementById('toggle-submissions-btn');
+    if (toggleBtn) {
+        let hiddenItems = document.querySelectorAll('.submission-item.hidden');
+        let isShowingAll = false;
+
+        toggleBtn.addEventListener('click', function() {
+            if (isShowingAll) {
+                hiddenItems.forEach(item => item.classList.add('hidden'));
+                this.textContent = 'Arată toate';
+                isShowingAll = false;
+            } else {
+                hiddenItems.forEach(item => item.classList.remove('hidden'));
+                this.textContent = 'Ascunde';
+                isShowingAll = true;
+            }
+        });
+    }
 </script>
 
 </body>
