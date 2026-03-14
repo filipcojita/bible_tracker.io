@@ -1,5 +1,8 @@
 <?php
 session_start();
+include 'auth.php';
+
+checkPersistentLogin();
 
 if (!isset($_SESSION['user_id'])) {
     header('Location: login.php');

@@ -17,6 +17,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['username'] = $row['username'];
             $_SESSION['role'] = $row['role']; // ✅ Store the role in session
 
+            if (isset($_POST['remember'])) {
+                $token = bin2hex(random_bytes(32));
+                $update_stmt = $conn->prepare("UPDATE users SET remember_token = ? WHERE id = ?");
+                $update_stmt->bind_param("si", $token, $row['id']);
+                $update_stmt->execute();
+                $update_stmt->close();
+                setcookie('remember_token', $token, time() + (30 * 24 * 60 * 60), "/"); // 30 days
+            }
+
             header("Location: dashboard.php");
             exit();
         } else {
@@ -56,11 +65,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <input type="password" class="form-control" id="password" name="password" required>
                         </div>
 
-                        <?php if (isset($error)): ?>
-                            <div class="alert alert-danger" role="alert">
-                                <?= $error; ?>
-                            </div>
-                        <?php endif; ?>
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="remember" name="remember">
+                            <label class="form-check-label" for="remember">Ține-mă conectat</label>
+                        </div>
 
                         <button type="submit" class="btn btn-success w-100">Autentifică-te</button>
                     </form>

@@ -1,11 +1,14 @@
 <?php
 session_start();
+include 'db.php';
+include 'auth.php';
+
+checkPersistentLogin();
+
 if (!isset($_SESSION['user_id'])) {
     header('Location: login.php');
     exit();
 }
-
-include 'db.php';
 
 $currentUserId = $_SESSION['user_id'];
 

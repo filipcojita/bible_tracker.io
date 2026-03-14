@@ -1,12 +1,14 @@
 <?php
 session_start();
+include 'db.php';
+include 'auth.php';
+
+checkPersistentLogin();
 
 if (!isset($_SESSION['user_id'])) {
     header('Location: login.php'); // Redirect to login if user is not logged in
     exit();
 }
-
-include 'db.php';
 
 $user_id = $_SESSION['user_id'];
 $username = $_SESSION['username']; // Get username for greeting

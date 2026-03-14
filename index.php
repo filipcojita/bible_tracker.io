@@ -1,6 +1,9 @@
 <?php
 include 'db.php';
+include 'auth.php';
 session_start();
+
+checkPersistentLogin();
 ?>
 
 <!DOCTYPE html>
@@ -24,6 +27,7 @@ session_start();
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="#camp">Tabără 2026</a></li>
                 <li class="nav-item"><a class="nav-link" href="#about">Despre noi</a></li>
                 <li class="nav-item"><a class="nav-link" href="#mission">Misiune</a></li>
                 <li class="nav-item"><a class="nav-link" href="#when">Când ne întâlnim</a></li>
@@ -44,6 +48,62 @@ session_start();
 </header>
 
 <main>
+    <section id="camp" class="py-5 border border-primary rounded mx-3 my-4">
+        <div class="container text-center">
+            <h2 class="mb-4"><i class="fas fa-campground text-primary me-2"></i>Tabara #tineretSperanta 2026</h2>
+            <p class="lead">Tabăra de anul acesta va avea loc între 10-15 August 2026. Locația a fost găsită, dar rămâne un secret până la anunțul oficial!</p>
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="card border-0 shadow">
+                        <div class="card-body">
+                            <h5 class="card-title">Timp rămas până la tabără</h5>
+                            <div id="countdown" class="display-4 text-primary"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-5">
+                <h3>Ghicește locația!</h3>
+                <p>Trimite 3 locuri in care crezi că va avea loc tabăra. Vom dezvălui mai târziu dacă ai ghicit corect!</p>
+                <?php
+                $has_submitted = false;
+                if (isset($_SESSION['user_id'])) {
+                    $user_id = $_SESSION['user_id'];
+                    $check = $conn->prepare("SELECT id FROM camp_guesses WHERE user_id = ?");
+                    $check->bind_param("i", $user_id);
+                    $check->execute();
+                    $result = $check->get_result();
+                    $has_submitted = $result->num_rows > 0;
+                    $check->close();
+                }
+                ?>
+                <?php if (isset($_SESSION['user_id'])): ?>
+                    <?php if ($has_submitted): ?>
+                        <p class="text-success">Ai trimis deja ghicirile tale pentru locația taberei. Vom dezvălui răspunsurile mai târziu!</p>
+                    <?php else: ?>
+                <form action="submit_guess.php" method="post" class="row g-3 justify-content-center">
+                    <div class="col-md-3">
+                        <input type="text" name="guess1" class="form-control" placeholder="Locatie 1" required>
+                    </div>
+                    <div class="col-md-3">
+                        <input type="text" name="guess2" class="form-control" placeholder="Locatie 2" required>
+                    </div>
+                    <div class="col-md-3">
+                        <input type="text" name="guess3" class="form-control" placeholder="Locatie 3" required>
+                    </div>
+                    <div class="col-md-3">
+                        <button type="submit" class="btn btn-primary">Trimite</button>
+                    </div>
+                </form>
+                    <?php endif; ?>
+                <?php else: ?>
+                <p class="text-muted">Trebuie să te autentifici pentru a trimite ghiciri.</p>
+                <a href="login.php" class="btn btn-outline-primary">Autentifică-te</a>
+                <?php endif; ?>
+            </div>
+        </div>
+    </section>
+
     <section id="about" class="py-5">
         <div class="container">
             <div class="row align-items-center">
@@ -168,5 +228,26 @@ session_start();
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    // Countdown to 10 August 2026
+    const countDownDate = new Date("August 10, 2026 00:00:00").getTime();
+
+    const x = setInterval(function() {
+        const now = new Date().getTime();
+        const distance = countDownDate - now;
+
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        document.getElementById("countdown").innerHTML = days + "z " + hours + "h " + minutes + "m " + seconds + "s ";
+
+        if (distance < 0) {
+            clearInterval(x);
+            document.getElementById("countdown").innerHTML = "Tabăra a început!";
+        }
+    }, 1000);
+</script>
 </body>
 </html>

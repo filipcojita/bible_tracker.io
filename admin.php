@@ -1,11 +1,14 @@
 <?php
 session_start();
+include 'db.php';
+include 'auth.php';
+
+checkPersistentLogin();
+
 if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
     header("Location: login.php");
     exit();
 }
-
-include 'db.php';
 
 // Fetch all users
 $sql = "SELECT id, username, email, role, created_at FROM users ORDER BY created_at DESC";

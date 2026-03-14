@@ -1,6 +1,9 @@
 <?php
 session_start();
 include 'db.php';
+include 'auth.php';
+
+checkPersistentLogin();
 
 date_default_timezone_set("Europe/Bucharest");
 
