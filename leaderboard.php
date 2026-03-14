@@ -22,33 +22,103 @@ $result = $conn->query($sql);
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ro">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Leaderboard - Bible Tracker</title>
+<title>Clasament - Bible Tracker</title>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
 <link rel="stylesheet" href="/bible_tracker/styles.css">
+
+<style>
+    .navbar {
+        margin-bottom: 20px;
+    }
+    .welcome-message {
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: #fff;
+    }
+    .leaderboard-card {
+        border: 2px solid #007bff;
+        border-radius: 15px;
+    }
+    .leaderboard-table thead {
+        background: linear-gradient(135deg, #007bff, #0056b3);
+        color: white;
+    }
+    .gold {
+        background: linear-gradient(90deg, #fff8dc, #ffd70033) !important;
+    }
+    .silver {
+        background: linear-gradient(90deg, #f8f9fa, #c0c0c033) !important;
+    }
+    .bronze {
+        background: linear-gradient(90deg, #fdf6ec, #cd7f3233) !important;
+    }
+    .current-user {
+        border-left: 6px solid #007bff;
+        background-color: #e7f3ff !important;
+    }
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+    }
+    .btn-primary:hover {
+        background-color: #0056b3;
+        border-color: #0056b3;
+    }
+</style>
 
 </head>
 
 <body>
 
-<div class="container mt-5">
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="dashboard.php">Bible Tracker</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto align-items-center">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.php"><i class="bi bi-house"></i> Acasă</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="leaderboard.php"><i class="bi bi-trophy"></i> Clasament</a>
+                </li>
+                <li class="nav-item me-3">
+                    <span class="navbar-text welcome-message">
+                        <?= htmlspecialchars($_SESSION['username'] ?? '') ?>
+                    </span>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="logout.php"><i class="bi bi-box-arrow-right"></i> Deconectează-te</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
 
-<div class="card shadow">
+<div class="container mt-4">
+
+<div class="card shadow leaderboard-card">
 <div class="card-body">
 
-<h2 class="mb-4 text-center">🏆 Leaderboard</h2>
+<h2 class="mb-4 text-center text-primary">🏆 Clasament</h2>
 
 <table class="table leaderboard-table align-middle text-center">
 <thead class="table-dark">
 <tr>
-<th>Rank</th>
-<th>User</th>
-<th>Submissions</th>
+<th>Rang</th>
+<th>Utilizator</th>
+<th>Puncte (meditații)</th>
 </tr>
 </thead>
 
@@ -73,9 +143,11 @@ if ($row['id'] == $currentUserId) {
 ?>
 
 <tr class="<?= $rowClass ?>">
-<td class="rank"><?= $rank ?></td>
+<td class="rank">
+    <?php if ($rank == 1) echo '🥇'; elseif ($rank == 2) echo '🥈'; elseif ($rank == 3) echo '🥉'; else echo $rank; ?>
+</td>
 <td class="username"><?= htmlspecialchars($row['username']) ?></td>
-<td><?= $row['total_submissions'] ?></td>
+<td><strong><?= $row['total_submissions'] ?></strong></td>
 </tr>
 
 <?php
@@ -86,13 +158,11 @@ endwhile;
 </tbody>
 </table>
 
-<div class="text-center mt-4">
+<div class="text-center mt-4 d-flex justify-content-center gap-3">
 
-<a href="dashboard.php" class="btn btn-primary">Trimite un raspuns</a>
+<a href="dashboard.php" class="btn btn-primary btn-lg"><i class="bi bi-send"></i> Trimite un răspuns</a>
 
-<a href="index.php" class="btn btn-secondary">ACASĂ</a>
-
-<a href="logout.php" class="btn btn-danger">Deconectează-te</a>
+<a href="index.php" class="btn btn-outline-secondary btn-lg"><i class="bi bi-house"></i> Acasă</a>
 
 </div>
 
