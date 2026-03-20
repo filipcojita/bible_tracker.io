@@ -16,9 +16,12 @@ if (!isset($_SESSION['user_id'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Scanner QR - Bible Tracker</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
-    <script src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- QR Scanner -->
+    <script src="https://unpkg.com/html5-qrcode/html5-qrcode.min.js"></script>
+
     <style>
         body {
             background: #111;
@@ -26,43 +29,137 @@ if (!isset($_SESSION['user_id'])) {
             text-align: center;
             font-family: Arial;
         }
-        #preview {
+
+        .container {
+            margin-top: 50px;
+        }
+
+        #reader {
             width: 100%;
             max-width: 400px;
             margin: 20px auto;
         }
-        .container {
-            margin-top: 50px;
+
+        .btn {
+            border-radius: 20px;
+            padding: 10px 25px;
+            margin: 5px;
         }
     </style>
 </head>
+
 <body>
 
 <div class="container">
-    <h2>Scanează Codul QR pentru Prezență</h2>
-    <video id="preview"></video>
-    <p id="status">Inițializare cameră...</p>
-    <a href="dashboard.php" class="btn btn-secondary"><i class="bi bi-arrow-left"></i> Înapoi la Dashboard</a>
+
+    <h2>📷 Scanează Codul QR pentru Prezență</h2>
+
+    <div id="reader"></div>
+
+    <p id="status">Apasă butonul pentru a deschide camera.</p>
+
+    <button id="startCamera" class="btn btn-primary">Deschide Cameră</button>
+    <button id="switchCamera" class="btn btn-warning" style="display:none;">🔄 Schimbă Camera</button>
+
+    <br><br>
+
+    <a href="dashboard.php" class="btn btn-secondary">Înapoi la Dashboard</a>
+
 </div>
 
 <script>
-    let scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
 
-    scanner.addListener('scan', function (content) {
-        // When QR code is scanned, redirect to attendance.php with the token
-        window.location.href = content;
-    });
+let html5QrCode;
+let cameras = [];
+let currentCameraIndex = 0;
 
-    Instascan.Camera.getCameras().then(function (cameras) {
-        if (cameras.length > 0) {
-            scanner.start(cameras[0]); // Start with the first camera
-            document.getElementById('status').textContent = 'Cameră activă. Scanează codul QR.';
+const config = {
+    fps: 10,
+    qrbox: 250
+};
+
+// START CAMERA
+document.getElementById('startCamera').addEventListener('click', function () {
+
+    document.getElementById('status').textContent = 'Se pornește camera...';
+
+    html5QrCode = new Html5Qrcode("reader");
+
+    Html5Qrcode.getCameras().then(devices => {
+
+        if (devices && devices.length) {
+
+            cameras = devices;
+
+            // Try to use back camera first
+            currentCameraIndex = 0;
+
+            for (let i = 0; i < cameras.length; i++) {
+                let label = cameras[i].label.toLowerCase();
+                if (label.includes("back") || label.includes("rear")) {
+                    currentCameraIndex = i;
+                    break;
+                }
+            }
+
+            startScanner(cameras[currentCameraIndex].id);
+
+            document.getElementById('startCamera').style.display = 'none';
+            document.getElementById('switchCamera').style.display = 'inline-block';
+
         } else {
-            document.getElementById('status').textContent = 'Nu s-a găsit nicio cameră.';
+            document.getElementById('status').textContent = 'Nu există camere disponibile.';
         }
-    }).catch(function (e) {
-        document.getElementById('status').textContent = 'Eroare la accesarea camerei: ' + e;
+
+    }).catch(err => {
+        document.getElementById('status').textContent = 'Eroare: ' + err;
     });
+
+});
+
+// FUNCTION TO START SCANNER
+function startScanner(cameraId) {
+
+    html5QrCode.start(
+        cameraId,
+        config,
+        qrCodeMessage => {
+
+            document.getElementById('status').textContent = 'Cod detectat!';
+
+            html5QrCode.stop().then(() => {
+
+                if (qrCodeMessage.includes("attendance.php")) {
+                    window.location.href = qrCodeMessage;
+                } else {
+                    alert("Cod QR invalid!");
+                    location.reload();
+                }
+
+            });
+
+        },
+        errorMessage => {
+            // ignore errors
+        }
+    );
+
+    document.getElementById('status').textContent = 'Cameră activă. Scanează codul QR.';
+}
+
+// SWITCH CAMERA
+document.getElementById('switchCamera').addEventListener('click', function () {
+
+    if (!cameras.length) return;
+
+    currentCameraIndex = (currentCameraIndex + 1) % cameras.length;
+
+    html5QrCode.stop().then(() => {
+        startScanner(cameras[currentCameraIndex].id);
+    });
+
+});
+
 </script>
 
 </body>
