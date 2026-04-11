@@ -24,6 +24,13 @@ function countWordsInFile($filePath) {
 function isFridayOrSunday($dateString) {
     $date = new DateTime($dateString);
     $dayOfWeek = $date->format('w'); // 0 = Sunday, 5 = Friday
+    
+    // Allow specific dates: April 9 and 10, 2026
+    $specialDates = ['2026-04-09', '2026-04-10'];
+    if (in_array($dateString, $specialDates)) {
+        return true;
+    }
+    
     return $dayOfWeek === '0' || $dayOfWeek === '5';
 }
 

@@ -2,6 +2,14 @@
 // Helper function to determine if a date is Friday or Sunday
 function isFridayOrSunday($date) {
     $dayOfWeek = $date->format('w'); // 0 = Sunday, 5 = Friday
+    
+    // Allow specific dates: April 9 and 10, 2026
+    $dateString = $date->format('Y-m-d');
+    $specialDates = ['2026-04-09', '2026-04-10'];
+    if (in_array($dateString, $specialDates)) {
+        return true;
+    }
+    
     return $dayOfWeek === '0' || $dayOfWeek === '5';
 }
 
