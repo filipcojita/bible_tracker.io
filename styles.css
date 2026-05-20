@@ -9,6 +9,37 @@ body {
     line-height: 1.6;
 }
 
+/* Shared navbar styling for dashboard, prayer wall, and leaderboard */
+.navbar {
+    margin-bottom: 24px;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+}
+
+.navbar-brand {
+    font-weight: 700;
+    letter-spacing: 0.02em;
+}
+
+.navbar-nav .nav-link {
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.95);
+}
+
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link.active {
+    color: #fff;
+    text-decoration: none;
+    background-color: rgba(255, 255, 255, 0.18);
+    border-radius: 999px;
+    padding: 0.5rem 0.85rem;
+}
+
+.welcome-message {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #fff;
+}
+
 .hero {
     background-size: cover;
     background-position: top;
@@ -104,4 +135,9 @@ section {
 .leaderboard-table tbody tr:hover {
     transform: scale(1.01);
     transition: 0.15s;
+}
+
+/* Hide extra submission dates until the user clicks "Show more" */
+.submission-item.hidden {
+    display: none;
 }

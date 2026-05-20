@@ -79,105 +79,66 @@ $show_all_button = count($submitted_dates) > 5;
     <title>Bible Tracker - Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
-    <style>
-        .navbar {
-            margin-bottom: 20px;
-        }
-        .welcome-message {
-            font-size: 1.2rem;
-            font-weight: bold;
-            color: #fff;
-        }
-        .submitted-dates ul {
-            list-style-type: none;
-            padding-left: 0;
-        }
-        .submitted-dates li {
-            background-color: #f8f9fa;
-            margin: 5px 0;
-            padding: 10px;
-            border-radius: 5px;
-        }
-        .hidden {
-            display: none;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="sermon_styles.css">
 </head>
 <body>
 
-<!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="dashboard.php">Bible Tracker</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto align-items-center">
-                <li class="nav-item">
-                    <a class="nav-link" href="index.php"><i class="bi bi-house"></i> Acasă</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="leaderboard.php"><i class="bi bi-trophy"></i> Clasament</a>
-                </li>
-                <li class="nav-item me-3">
-                    <span class="navbar-text welcome-message">
-                        <?= htmlspecialchars($username) ?>
-                    </span>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="logout.php"><i class="bi bi-box-arrow-right"></i> Deconectează-te</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
+<?php $activePage = 'dashboard'; include 'navbar.php'; ?>
 
 <div class="container mt-4">
-    <h2>Înregistrează-ți meditația biblică de astăzi</h2>
+    <div class="row gx-4 gy-4">
+        <div class="col-12 col-lg-6">
+            <h2>Înregistrează-ți meditația biblică de astăzi</h2>
 
-    <!-- Submission Form -->
-    <form method="post" class="form-group">
-        <div class="mb-3">
-            <label for="date" class="form-label">Selectează Data:</label>
-            <input type="date" name="date" id="date-picker" max="<?= $today ?>" class="form-control" required>
-        </div>
-        <div class="mb-3">
-            <label for="passage" class="form-label">Pasaj Biblic:</label>
-            <input type="text" name="passage" class="form-control" required>
-        </div>
-        <div class="mb-3">
-            <label for="reflection" class="form-label">Reflecție: (Cu ce ai rămas?)</label>
-            <textarea name="reflection" class="form-control" required></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary"><i class="bi bi-send"></i> Trimite</button>
-    </form>
+            <!-- Submission Form -->
+            <form method="post" class="form-group">
+                <div class="mb-3">
+                    <label for="date" class="form-label">Selectează Data:</label>
+                    <input type="date" name="date" id="date-picker" max="<?= $today ?>" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label for="passage" class="form-label">Pasaj Biblic:</label>
+                    <input type="text" name="passage" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label for="reflection" class="form-label">Reflecție: (Cu ce ai rămas?)</label>
+                    <textarea name="reflection" class="form-control" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary"><i class="bi bi-send"></i> Trimite</button>
+            </form>
 
-    <!-- User Past Submissions -->
-    <h3 class="mt-4">Înregistrări anterioare:</h3>
-    <div class="submitted-dates">
-        <ul>
-            <?php $count = 0; foreach ($submitted_dates as $date): ?>
-                <li class="submission-item <?php if ($count >= 5) echo 'hidden'; ?>"><strong><?= htmlspecialchars(date('d-M-Y', strtotime($date))) ?></strong></li>
-            <?php $count++; endforeach; ?>
-        </ul>
+            <!-- User Past Submissions -->
+            <h3 class="mt-4">Înregistrări anterioare:</h3>
+            <div class="submitted-dates">
+                <ul>
+                    <?php $count = 0; foreach ($submitted_dates as $date): ?>
+                        <li class="submission-item<?php if ($count >= 5) echo ' hidden'; ?>"<?php if ($count >= 5) echo ' style="display:none;"'; ?>><strong><?= htmlspecialchars(date('d-M-Y', strtotime($date))) ?></strong></li>
+                    <?php $count++; endforeach; ?>
+                </ul>
+            </div>
+
+            <?php if ($show_all_button): ?>
+                <button id="toggle-submissions-btn" class="btn btn-secondary me-2"><i class="bi bi-eye"></i> Arată toate</button>
+            <?php endif; ?>
+
+            <div class="mt-3">
+                <a href="qr_scanner.php" class="btn btn-success me-2 mb-2"><i class="bi bi-camera"></i> Deschide Cameră</a>
+                <a href="leaderboard.php" class="btn btn-info me-2 mb-2"><i class="bi bi-trophy"></i> Vezi Clasamentul</a>
+                <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
+                    <a href="admin.php" class="btn btn-warning mb-2"><i class="bi bi-gear"></i> Panou Admin</a>
+                <?php endif; ?>
+            </div>
+        </div>
+
+        <div class="col-12 col-lg-6">
+            <?php include 'sermon_calendar.php'; ?>
+        </div>
     </div>
-
-    <!-- Leaderboard and Admin Panel -->
-    <?php if ($show_all_button): ?>
-        <button id="toggle-submissions-btn" class="btn btn-secondary me-2"><i class="bi bi-eye"></i> Arată toate</button>
-    <?php endif; ?>
-    <a href="qr_scanner.php" class="btn btn-success me-2"><i class="bi bi-camera"></i> Deschide Cameră</a>
-    <a href="leaderboard.php" class="btn btn-info"><i class="bi bi-trophy"></i> Vezi Clasamentul</a>
-
-<?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
-    <a href="admin.php" class="btn btn-warning"><i class="bi bi-gear"></i> Panou Admin</a>
-<?php endif; ?>
-
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+<script src="sermon_modal.js"></script>
 
 <script>
     let submittedDates = <?= json_encode($submitted_dates) ?>;
@@ -198,11 +159,17 @@ $show_all_button = count($submitted_dates) > 5;
 
         toggleBtn.addEventListener('click', function() {
             if (isShowingAll) {
-                hiddenItems.forEach(item => item.classList.add('hidden'));
+                hiddenItems.forEach(item => {
+                    item.style.display = 'none';
+                    item.classList.add('hidden');
+                });
                 this.innerHTML = '<i class="bi bi-eye"></i> Arată toate';
                 isShowingAll = false;
             } else {
-                hiddenItems.forEach(item => item.classList.remove('hidden'));
+                hiddenItems.forEach(item => {
+                    item.style.display = '';
+                    item.classList.remove('hidden');
+                });
                 this.innerHTML = '<i class="bi bi-eye-slash"></i> Ascunde';
                 isShowingAll = true;
             }
