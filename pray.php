@@ -153,11 +153,11 @@ $is_admin = isset($_SESSION['role']) && $_SESSION['role'] === 'admin';
                         <label for="prayerCategory" class="form-label">Category *</label>
                         <select class="form-select" id="prayerCategory" required>
                             <option value="">Select a category...</option>
-                            <option value="lauda">Lauda (Praise)</option>
-                            <option value="multumire">Mulțumire (Thanksgiving)</option>
-                            <option value="cerere">Cerere (Request)</option>
-                            <option value="mijlocire">Mijlocire (Intercession)</option>
-                            <option value="marturisire">Mărturisire (Confession)</option>
+                            <option value="lauda">Laudă</option>
+                            <option value="multumire">Mulțumire</option>
+                            <option value="cerere">Cerere</option>
+                            <option value="mijlocire">Mijlocire</option>
+                            <option value="marturisire">Mărturisire</option>
                         </select>
                     </div>
 
@@ -265,7 +265,13 @@ $is_admin = isset($_SESSION['role']) && $_SESSION['role'] === 'admin';
     </div>
 
     <!-- Scripts -->
+    <script>
+        window.prayerWallUser = {
+            id: <?= json_encode($_SESSION['user_id'] ?? null) ?>,
+            isAdmin: <?= json_encode($is_admin) ?>
+        };
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="pray_script.js"></script>
+    <script src="pray_script.js?v=2"></script>
 </body>
 </html>

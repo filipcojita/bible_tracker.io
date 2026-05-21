@@ -1,0 +1,42 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"chat.tools.terminal.autoApprove": {
+			"/Applications/XAMPP/xamppfiles/bin/mysql": true,
+			"/^sudo /Applications/XAMPP/xamppfiles/bin/mysqld_safe &$/": {
+				"approve": true,
+				"matchCommandLine": true
+			},
+			"/^php setup_prayer_wall\\.php$/": {
+				"approve": true,
+				"matchCommandLine": true
+			},
+			"/^sleep 5 && php setup_prayer_wall\\.php$/": {
+				"approve": true,
+				"matchCommandLine": true
+			},
+			"/Applications/XAMPP/xamppfiles/bin/mysqld": true,
+			"./bin/mysqld_safe": true,
+			"/^sudo /Applications/XAMPP/xamppfiles/bin/mysqld_safe --datadir=/Applications/XAMPP/xamppfiles/var/mysql --socket=/Applications/XAMPP/xamppfiles/var/mysql/mysql\\.sock &$/": {
+				"approve": true,
+				"matchCommandLine": true
+			},
+			"/^php -l dashboard\\.php$/": {
+				"approve": true,
+				"matchCommandLine": true
+			},
+			"/^php -l api/pray_list\\.php && php -l api/pray_search\\.php && php -l api/pray_edit\\.php && node -c pray_script\\.js$/": {
+				"approve": true,
+				"matchCommandLine": true
+			},
+			"/^php -l pray\\.php && php -l api/pray_list\\.php && php -l api/pray_search\\.php$/": {
+				"approve": true,
+				"matchCommandLine": true
+			}
+		}
+	}
+}

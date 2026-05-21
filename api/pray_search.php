@@ -79,11 +79,19 @@ while ($row = $result->fetch_assoc()) {
     $row['emoticons'] = $emoticons;
     $row['praying_count'] = (int)$row['praying_count'];
     $row['user_has_prayed'] = (bool)$row['user_has_prayed'];
+    $row['is_owner'] = ($row['user_id'] == $user_id);
+    $row['is_admin'] = isset($_SESSION['role']) && $_SESSION['role'] === 'admin';
+    $row['can_manage'] = $row['is_owner'] || $row['is_admin'];
     
     $prayers[] = $row;
 }
 
 $stmt->close();
 
-echo json_encode(['success' => true, 'prayers' => $prayers]);
+echo json_encode([
+    'success' => true,
+    'current_user_id' => $user_id,
+    'current_user_is_admin' => isset($_SESSION['role']) && $_SESSION['role'] === 'admin',
+    'prayers' => $prayers
+]);
 ?>

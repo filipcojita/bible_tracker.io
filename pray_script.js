@@ -7,6 +7,12 @@ class PrayerWall {
     constructor() {
         this.currentCategory = '';
         this.currentPrayerId = null;
+        this.currentPrayerOwner = false;
+        this.currentPrayerAdmin = false;
+        this.currentUserId = null;
+        this.currentUserIsAdmin = false;
+        this.editMode = false;
+        this.editPrayerId = null;
         this.emotionPickerActive = false;
         
         // Predefined emoticons
@@ -16,6 +22,10 @@ class PrayerWall {
     }
 
     init() {
+        if (window.prayerWallUser) {
+            this.currentUserId = window.prayerWallUser.id;
+            this.currentUserIsAdmin = window.prayerWallUser.isAdmin;
+        }
         this.cacheDOM();
         this.bindEvents();
         this.loadPrayers();
@@ -115,11 +125,35 @@ class PrayerWall {
         });
     }
 
-    openNewPrayerModal() {
+    openNewPrayerModal(edit = false, prayer = null) {
+        this.editMode = edit;
+        this.editPrayerId = edit && prayer ? prayer.id : null;
+        this.currentPrayerOwner = edit && prayer ? prayer.is_owner : false;
+        this.currentPrayerAdmin = edit && prayer ? prayer.is_admin : false;
+
         this.newPrayerForm.reset();
         this.newPrayerMessage.classList.add('d-none');
         document.getElementById('titleCount').textContent = '0/200 characters';
         document.getElementById('descCount').textContent = '0/1000 characters';
+
+        if (edit && prayer) {
+            this.prayerTitle.value = prayer.title;
+            this.prayerDescription.value = prayer.description || '';
+            this.prayerCategory.value = prayer.category;
+            this.prayerAnonymous.checked = prayer.is_anonymous;
+            this.prayerAnonymous.parentElement.style.display = 'block';
+            document.querySelector('#newPrayerModal .modal-title').textContent = 'Edit Prayer Request';
+            this.submitNewPrayer.innerHTML = '<span class="spinner-border spinner-border-sm d-none me-2" role="status" aria-hidden="true" id="submitSpinner"></span> Save Changes';
+        } else {
+            this.prayerAnonymous.parentElement.style.display = 'block';
+            document.querySelector('#newPrayerModal .modal-title').textContent = 'Share a Prayer Request';
+            this.submitNewPrayer.innerHTML = '<span class="spinner-border spinner-border-sm d-none me-2" role="status" aria-hidden="true" id="submitSpinner"></span> Share Prayer';
+        }
+
+        if (edit && !this.currentPrayerOwner && !this.currentPrayerAdmin) {
+            this.prayerAnonymous.parentElement.style.display = 'none';
+        }
+
         this.newPrayerModal.classList.add('show');
         document.body.classList.add('modal-open');
     }
@@ -151,30 +185,40 @@ class PrayerWall {
         submitBtn.disabled = true;
         spinner.classList.remove('d-none');
         
+        const payload = {
+            title: this.prayerTitle.value,
+            description: this.prayerDescription.value,
+            category: this.prayerCategory.value,
+            is_anonymous: this.prayerAnonymous.checked
+        };
+
+        const endpoint = this.editMode ? 'api/pray_edit.php' : 'api/pray_create.php';
+        if (this.editMode) {
+            payload.prayer_id = this.editPrayerId;
+        }
+
         try {
-            const response = await fetch('api/pray_create.php', {
+            const response = await fetch(endpoint, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({
-                    title: this.prayerTitle.value,
-                    description: this.prayerDescription.value,
-                    category: this.prayerCategory.value,
-                    is_anonymous: this.prayerAnonymous.checked
-                })
+                body: JSON.stringify(payload)
             });
             
             const data = await response.json();
             
             if (data.success) {
-                this.showMessage(this.newPrayerMessage, 'Prayer request shared! 🙏', false);
+                const successMessage = this.editMode ? 'Prayer updated successfully.' : 'Prayer request shared! 🙏';
+                this.showMessage(this.newPrayerMessage, successMessage, false);
                 setTimeout(() => {
                     this.closeModal(this.newPrayerModal);
+                    this.editMode = false;
+                    this.editPrayerId = null;
                     this.loadPrayers();
-                }, 1500);
+                }, 1200);
             } else {
-                this.showMessage(this.newPrayerMessage, data.message || 'Error creating prayer', true);
+                this.showMessage(this.newPrayerMessage, data.message || 'Error saving prayer', true);
             }
         } catch (error) {
             this.showMessage(this.newPrayerMessage, 'Error: ' + error.message, true);
@@ -205,6 +249,8 @@ class PrayerWall {
             const data = await response.json();
             
             if (data.success) {
+                this.currentUserId = data.current_user_id;
+                this.currentUserIsAdmin = data.current_user_is_admin;
                 this.renderPrayers(data.prayers);
             }
         } catch (error) {
@@ -256,7 +302,15 @@ class PrayerWall {
         }
     }
 
+    normalizePrayer(prayer) {
+        prayer.can_manage = prayer.can_manage || prayer.user_id == this.currentUserId || prayer.is_admin || false;
+        prayer.is_owner = prayer.is_owner || prayer.user_id == this.currentUserId;
+        prayer.is_admin = prayer.is_admin || this.currentUserIsAdmin;
+        return prayer;
+    }
+
     createPrayerCard(prayer) {
+        prayer = this.normalizePrayer(prayer);
         const card = document.createElement('div');
         card.className = 'col-12 col-sm-6 col-md-4 col-lg-3 mb-4';
         card.innerHTML = `
@@ -283,11 +337,19 @@ class PrayerWall {
                         }
                     </div>
                     
-                    <div class="prayer-actions mt-3">
+                    <div class="prayer-actions mt-3 flex-wrap gap-2">
                         <button class="btn btn-sm btn-outline-primary see-details" data-prayer-id="${prayer.id}">
                             See details <i class="fas fa-arrow-right"></i>
                         </button>
-                        <span class="badge bg-info ms-2">
+                        ${prayer.can_manage ? `
+                            <button class="btn btn-sm btn-outline-warning edit-prayer" data-prayer-id="${prayer.id}">
+                                <i class="fas fa-edit"></i> Edit
+                            </button>
+                            <button class="btn btn-sm btn-outline-danger delete-prayer" data-prayer-id="${prayer.id}">
+                                <i class="fas fa-trash-alt"></i> Delete
+                            </button>
+                        ` : ''}
+                        <span class="badge bg-info ms-auto">
                             <i class="fas fa-hands-praying"></i> ${prayer.praying_count}
                         </span>
                     </div>
@@ -298,6 +360,20 @@ class PrayerWall {
         card.querySelector('.see-details').addEventListener('click', () => {
             this.openPrayerDetails(prayer);
         });
+
+        const editBtn = card.querySelector('.edit-prayer');
+        if (editBtn) {
+            editBtn.addEventListener('click', () => {
+                this.openNewPrayerModal(true, prayer);
+            });
+        }
+
+        const deleteBtn = card.querySelector('.delete-prayer');
+        if (deleteBtn) {
+            deleteBtn.addEventListener('click', () => {
+                this.confirmDeletePrayer(prayer.id);
+            });
+        }
         
         return card;
     }
@@ -453,10 +529,58 @@ class PrayerWall {
 
     setupDetailsFooter(prayer) {
         this.detailsFooter.innerHTML = '';
-        
-        // You can add edit/delete buttons here based on permissions
-        // This would require checking if current user is owner or admin
-        // For now, we'll add generic buttons that could be extended
+
+        const closeButton = document.createElement('button');
+        closeButton.type = 'button';
+        closeButton.className = 'btn btn-secondary';
+        closeButton.textContent = 'Close';
+        closeButton.addEventListener('click', () => this.closeModal(this.prayerDetailsModal));
+        this.detailsFooter.appendChild(closeButton);
+
+        if (prayer.can_manage) {
+            const editButton = document.createElement('button');
+            editButton.type = 'button';
+            editButton.className = 'btn btn-warning';
+            editButton.textContent = 'Edit';
+            editButton.addEventListener('click', () => {
+                this.openNewPrayerModal(true, prayer);
+                this.closeModal(this.prayerDetailsModal);
+            });
+            this.detailsFooter.appendChild(editButton);
+
+            const deleteButton = document.createElement('button');
+            deleteButton.type = 'button';
+            deleteButton.className = 'btn btn-danger';
+            deleteButton.textContent = 'Delete';
+            deleteButton.addEventListener('click', () => this.confirmDeletePrayer(prayer.id));
+            this.detailsFooter.appendChild(deleteButton);
+        }
+    }
+
+    async confirmDeletePrayer(prayerId) {
+        if (!confirm('Delete this prayer request? This cannot be undone.')) {
+            return;
+        }
+
+        try {
+            const response = await fetch('api/pray_delete.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ prayer_id: prayerId })
+            });
+
+            const data = await response.json();
+            if (data.success) {
+                this.closeModal(this.prayerDetailsModal);
+                this.loadPrayers();
+            } else {
+                this.showMessage(this.detailsMessage, data.message || 'Error deleting prayer', true);
+            }
+        } catch (error) {
+            this.showMessage(this.detailsMessage, 'Error: ' + error.message, true);
+        }
     }
 
     async handleSearch(e) {
@@ -472,6 +596,8 @@ class PrayerWall {
             const data = await response.json();
             
             if (data.success) {
+                this.currentUserId = data.current_user_id;
+                this.currentUserIsAdmin = data.current_user_is_admin;
                 this.renderPrayers(data.prayers);
             }
         } catch (error) {
@@ -481,11 +607,11 @@ class PrayerWall {
 
     getCategoryLabel(category) {
         const labels = {
-            'lauda': '🎵 Lauda (Praise)',
-            'multumire': '🙏 Mulțumire (Thanksgiving)',
-            'cerere': '❤️ Cerere (Request)',
-            'mijlocire': '🕊️ Mijlocire (Intercession)',
-            'marturisire': '✝️ Mărturisire (Confession)'
+            'lauda': '🎵 Lauda',
+            'multumire': '🙏 Mulțumire',
+            'cerere': '❤️ Cerere',
+            'mijlocire': '🕊️ Mijlocire',
+            'marturisire': '✝️ Mărturisire'
         };
         return labels[category] || category;
     }

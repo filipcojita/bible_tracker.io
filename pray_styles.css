@@ -149,12 +149,26 @@
 
 .prayer-actions {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     gap: 0.5rem;
+    justify-content: space-between;
+}
+
+.prayer-actions .btn {
+    min-width: 100px;
+}
+
+.prayer-actions .btn:not(:last-child) {
+    margin-right: 0.25rem;
+}
+
+.prayer-actions .badge {
+    flex-shrink: 0;
 }
 
 .see-details {
-    flex: 1;
+    flex: 1 1 auto;
     text-decoration: none;
     transition: all 0.3s ease;
 }

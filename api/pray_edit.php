@@ -19,12 +19,14 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 $user_id = $_SESSION['user_id'];
+$is_admin = isset($_SESSION['role']) && $_SESSION['role'] === 'admin';
 $data = json_decode(file_get_contents('php://input'), true);
 
 $prayer_id = isset($data['prayer_id']) ? (int)$data['prayer_id'] : 0;
 $title = isset($data['title']) ? trim($data['title']) : '';
 $description = isset($data['description']) ? trim($data['description']) : '';
 $category = isset($data['category']) ? trim($data['category']) : '';
+$is_anonymous = isset($data['is_anonymous']) ? (bool)$data['is_anonymous'] : false;
 
 // Validate input
 $errors = [];
@@ -64,7 +66,7 @@ if (!$prayer) {
     exit();
 }
 
-if ($prayer['user_id'] !== $user_id) {
+if ($prayer['user_id'] !== $user_id && !$is_admin) {
     http_response_code(403);
     echo json_encode(['success' => false, 'message' => 'Permission denied']);
     exit();
@@ -72,7 +74,7 @@ if ($prayer['user_id'] !== $user_id) {
 
 // Update prayer
 $update_stmt = $conn->prepare(
-    "UPDATE prayer_requests SET title = ?, description = ?, category = ? WHERE id = ?"
+    "UPDATE prayer_requests SET title = ?, description = ?, category = ?, is_anonymous = ? WHERE id = ?"
 );
 
 if (!$update_stmt) {
@@ -81,7 +83,7 @@ if (!$update_stmt) {
     exit();
 }
 
-$update_stmt->bind_param('sssi', $title, $description, $category, $prayer_id);
+$update_stmt->bind_param('sssii', $title, $description, $category, $is_anonymous, $prayer_id);
 
 if ($update_stmt->execute()) {
     echo json_encode(['success' => true, 'message' => 'Prayer updated successfully']);
