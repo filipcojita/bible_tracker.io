@@ -96,3 +96,18 @@ The project includes:
 - Use existing `sermon_upload.php` upload validation flow for new features.
 - For changes to the dashboard layout, modify `dashboard.php` using Bootstrap column structure.
 - If adding new sermon upload capabilities, update both the calendar component and the modal/endpoint logic.
+- After making changes to any feature, update any existing markdown documentation files related to that feature (for example `PRAYER_WALL_DOCUMENTATION.md`) so implementation notes and timelines remain current.
+
+## Feature Documentation
+
+Quick links to feature-specific documentation:
+
+- [Daily Meditation Documentation](DAILY_MEDITATION_DOCUMENTATION.md)
+- [Sermon Upload Documentation](SERMON_UPLOAD_DOCUMENTATION.md)
+- [Prayer Wall Documentation](PRAYER_WALL_DOCUMENTATION.md)
+- [Attendance Documentation](ATTENDANCE_DOCUMENTATION.md)
+
+Also see general and project-level docs:
+
+- [Project README](README.md)
+- [Soundboard README](soundboard/README.md)

@@ -1,7 +1,18 @@
-# Prayer Wall Feature - Implementation Complete ✅
+# Prayer Wall Feature - Change Log
 
 ## Overview
-The Prayer Wall feature (`/pray`) is now fully implemented and ready for deployment. This is a collaborative prayer request management system where logged-in users can share prayer requests, interact with them via emoticons, and mark themselves as "praying for you."
+The Prayer Wall feature (`/pray`) is an actively maintained prayer request management system where logged-in users can share prayer requests, interact with them via emoticons, and mark themselves as "praying for you."
+
+## Change Timeline
+- **May 2026**: Added inline Edit/Delete buttons on prayer cards and modal footer for owners/admins.
+- **May 2026**: Updated `pray_edit.php` to allow admins to edit any prayer and preserve anonymous posting.
+- **May 2026**: Added `current_user_id` and `current_user_is_admin` to prayer list/search API responses for consistent frontend permissions.
+- **May 2026**: Added frontend user context injection via `window.prayerWallUser` and cache-busting for `pray_script.js`.
+- **May 2026**: Updated documentation to track ongoing changes and support repeated AI updates.
+
+> Note: Whenever a feature is changed, update this documentation and any other related markdown files so the current implementation state is preserved.
+
+---
 
 ---
 
@@ -19,7 +30,7 @@ The Prayer Wall feature (`/pray`) is now fully implemented and ready for deploym
 3. **`pray_reactions.php`** — POST: Add/update emoticon reactions
 4. **`pray_praying.php`** — POST: Toggle "praying for you" status
 5. **`pray_delete.php`** — POST: Delete prayer (owner or admin only)
-6. **`pray_edit.php`** — POST: Edit prayer (owner only)
+6. **`pray_edit.php`** — POST: Edit prayer (owner or admin only)
 7. **`pray_search.php`** — GET: Search prayers by keyword
 
 ### Frontend Assets
@@ -76,8 +87,9 @@ http://localhost/bible_tracker/pray.php
 ✅ **See Who's Praying** — View list of users actively praying (non-anonymous)  
 ✅ **Search** — Real-time search across title + description  
 ✅ **Category Tabs** — Filter by category, newest first  
-✅ **Edit Prayers** — Users can edit their own prayers  
-✅ **Delete Prayers** — Users delete own, admins delete any  
+✅ **Edit Prayers** — Users can edit their own prayers; admins can edit any prayer
+✅ **Delete Prayers** — Users delete own prayers; admins delete any prayer
+✅ **Inline Card Actions** — Edit/Delete buttons appear on prayer cards for eligible users
 ✅ **Anonymous Posting** — Users can hide their identity  
 ✅ **Admin Controls** — Full moderation capabilities  
 
@@ -110,7 +122,7 @@ http://localhost/bible_tracker/pray.php
 - **Reactions Display** — Shows count of each emoji reaction
 - **"Praying for You" Button** — Toggle with visual feedback (highlighted when active)
 - **Praying Users List** — Expandable, shows who's praying
-- **Edit/Delete Buttons** — For owner/admin (if added to footer)
+- **Edit/Delete Buttons** — For owner/admin in the modal footer and on prayer cards
 
 ---
 
@@ -169,7 +181,8 @@ Body: {
   "prayer_id": int,
   "title": "string",
   "description": "string",
-  "category": "string"
+  "category": "string",
+  "is_anonymous": boolean
 }
 Response: { "success": bool, "message": string }
 ```
@@ -181,6 +194,14 @@ Response: { "success": true, "prayers": [prayer, ...] }
 ```
 
 ---
+
+## 📝 Latest Implementation Notes
+- `pray.php` now exposes the current user ID and admin state via `window.prayerWallUser`, which the frontend uses to render Edit/Delete actions correctly.
+- `pray_script.js` loads prayer data and normalizes owner/admin permissions for each prayer card.
+- Edit/Delete buttons are available directly on the prayer cards and inside the prayer details modal
+- `pray_edit.php` now allows admins to update any prayer and preserves anonymous posting state
+- `pray_list.php` / `pray_search.php` now return `current_user_id` and `current_user_is_admin` to keep frontend authorization consistent
+- Script caching is handled by `pray_script.js?v=2` so latest frontend behavior loads without stale cached JS
 
 ## 🎨 Design Details
 
@@ -420,7 +441,3 @@ Indexes: prayer_id, user_id
 - GDPR-friendly (respects anonymous posting)
 
 ---
-
-**Implementation Status: ✅ COMPLETE**
-
-All features requested have been implemented and tested. The system is ready for production use once the database is initialized via the setup script.
