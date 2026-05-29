@@ -2,6 +2,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
 
 body {
+    margin: 0;
+    padding: 0;
     background: #f8f9fa;
     color: #212529;
     text-align: left;
@@ -11,7 +13,7 @@ body {
 
 /* Shared navbar styling for dashboard, prayer wall, and leaderboard */
 .navbar {
-    margin-bottom: 24px;
+    margin-bottom: 0 !important;
     box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
 }
 
@@ -41,12 +43,18 @@ body {
 }
 
 .hero {
+    margin-top: 0;
     background-size: cover;
     background-position: top;
     color: white;
     padding: 120px 0;
     position: relative;
     text-shadow: 0 2px 4px rgba(0,0,0,0.7);
+}
+
+.hero .btn {
+    text-shadow: none !important;
+    box-shadow: none !important;
 }
 
 .hero::after {

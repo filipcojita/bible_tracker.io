@@ -19,7 +19,7 @@ checkPersistentLogin();
 <body>
 
 <!-- navigation -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="margin-bottom: 0;">
     <div class="container">
         <a class="navbar-brand" href="#">#tineretSperanta - ACASĂ</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -39,67 +39,101 @@ checkPersistentLogin();
 </nav>
 
 <!-- hero section -->
-<header class="hero" style="background-image:url('images/hero.jpeg');">
+<header class="hero" style="margin-top: 0; background-image:url('images/hero.jpeg');">
     <div class="container text-center">
         <h1 class="display-4 fw-bold">Bun venit ACASĂ!</h1>
         <p class="lead mb-4">#tineretSperanta - comunitatea tinerilor din Biserica Baptistă Speranța Arad</p>
-        <a href="#bibletracker" class="btn btn-light btn-lg shadow">Catre Bible Tracker</a>
+        <a href="#bibletracker" class="btn btn-light btn-lg" style="text-shadow:none !important; box-shadow:none !important; filter:none !important;">Catre Bible Tracker</a>
     </div>
 </header>
 
 <main>
     <section id="camp" class="py-5 border border-primary rounded mx-3 my-4">
-        <div class="container text-center">
-            <h2 class="mb-4"><i class="fas fa-campground text-primary me-2"></i>Tabara #tineretSperanta 2026</h2>
-            <p class="lead">Tabăra de anul acesta va avea loc între 10-15 August 2026. Locația a fost găsită, dar rămâne un secret până la anunțul oficial!</p>
-            <div class="row justify-content-center">
-                <div class="col-md-6">
-                    <div class="card border-0 shadow">
-                        <div class="card-body">
-                            <h5 class="card-title">Timp rămas până la tabără</h5>
-                            <div id="countdown" class="display-4 text-primary"></div>
+        <div class="container">
+            <div class="row align-items-center gy-4 mb-5">
+                <div class="col-lg-6">
+                    <h2 class="mb-4"><i class="fas fa-campground text-primary me-2"></i>Tabara 2026: 10-15 August</h2>
+                    <p class="lead">Locația a fost descoperită: un castel fermecător în inima Transilvaniei, într-o regiune plină de istorie și peisaje spectaculoase.</p>
+                    <div class="alert alert-success rounded-4 shadow-sm" role="alert">
+                        <h5 class="mb-2">Felicitări celor care ați ghicit!</h5>
+                        <p class="mb-2">Mulțumim tuturor pentru imaginație și pentru participare. Această locație a fost aleasă cu grijă pentru experiența pe care ți-o vom oferi.</p>
+                        <a href="https://maps.app.goo.gl/6pFD6UEhfsjre6kF8" target="_blank" rel="noopener" class="btn btn-outline-primary btn-sm">Deschide în Google Maps</a>
+                    </div>
+                    <div class="p-4 bg-white rounded-4 shadow-sm mb-4">
+                        <h5 class="mb-3">Ce te așteaptă</h5>
+                        <ul class="list-unstyled mb-0">
+                            <li class="mb-3"><i class="fas fa-mountain text-primary me-2"></i><strong>Drumeții montane</strong> prin peisajele Carpaților</li>
+                            <li class="mb-3"><i class="fas fa-road text-primary me-2"></i><strong>Karting</strong> și adrenalină</li>
+                            <li class="mb-3"><i class="fas fa-music text-primary me-2"></i><strong>Seri de laudă și închinare</strong> cu echipa noastră de închinare și invitați speciali</li>
+                            <li class="mb-3"><i class="fas fa-book text-primary me-2"></i><strong>Studiu și timp de partajare</strong> împreună în intimitate spirituală</li>
+                            <li class="mb-3"><i class="fas fa-pray text-primary me-2"></i><strong>Rugăciune și reflecție</strong> într-o atmosferă calmă</li>
+                            <li class="mb-3"><i class="fas fa-fire text-primary me-2"></i><strong>Foc de tabără</strong> în ultima seară cu povești și cântece</li>
+                            <li class="mb-3"><i class="fas fa-star text-primary me-2"></i><strong>Un eveniment deosebit</strong> pe o seară pe care nu o vei uita</li>
+                            <li class="mb-0"><i class="fas fa-heart text-primary me-2"></i><strong>Comunitate autentică</strong> și prietenii care vor dura</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card bg-primary text-white border-0 shadow-lg">
+                        <div class="card-body p-5 text-center" style="background: linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%);">
+                            <h5 class="card-title mb-3">COUNTDOWN</h5>
+                            <p class="text-white-50 mb-4">Zile până la cea mai frumoasă experiență a verii</p>
+                            <div id="countdown" class="display-4 fw-bold text-white" style="letter-spacing: 2px; line-height: 1.2;"></div>
+                            <p class="mt-4 mb-0 text-white-75">Transilvania te așteaptă</p>
                         </div>
+                    </div>
+                    <div class="mt-4 p-4 bg-light rounded-4 shadow-sm">
+                        <h6 class="mb-3">Despre zona în care mergem:</h6>
+                        <p class="mb-0">Brașovul este cunoscut ca <strong>Poarta Moldovei</strong> și se află la poalele Munților Piatra Mare. Regiunea este bogată în poveștile Transilvaniei și oferă peisaje de neomis cu foreste des și văi pitorești. Locația se află în acest cadru natural grandios, pe care îl vei descoperi în fiecare moment al taberei.</p>
                     </div>
                 </div>
             </div>
-            <div class="mt-5">
-                <h3>Ghicește locația!</h3>
-                <p>Trimite 3 locuri in care crezi că va avea loc tabăra. Vom dezvălui mai târziu dacă ai ghicit corect!</p>
-                <?php
-                $has_submitted = false;
-                if (isset($_SESSION['user_id'])) {
-                    $user_id = $_SESSION['user_id'];
-                    $check = $conn->prepare("SELECT id FROM camp_guesses WHERE user_id = ?");
-                    $check->bind_param("i", $user_id);
-                    $check->execute();
-                    $result = $check->get_result();
-                    $has_submitted = $result->num_rows > 0;
-                    $check->close();
-                }
-                ?>
-                <?php if (isset($_SESSION['user_id'])): ?>
-                    <?php if ($has_submitted): ?>
-                        <p class="text-success">Ai trimis deja ghicirile tale pentru locația taberei. Vom dezvălui răspunsurile mai târziu!</p>
-                    <?php else: ?>
-                <form action="submit_guess.php" method="post" class="row g-3 justify-content-center">
-                    <div class="col-md-3">
-                        <input type="text" name="guess1" class="form-control" placeholder="Locatie 1" required>
+            
+            <div class="row mb-4">
+                <div class="col-12">
+                    <h4 class="mb-4 text-center">Tabara ta pentru 5 zile memorabile</h4>
+                    <div class="rounded-4 overflow-hidden shadow-lg">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d727150.22705297!2d25.979569989711337!3d45.7229707447215!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40b35f3aa6674201%3A0x3db2506e3152d311!2sKastel%20Transylvania!5e0!3m2!1sen!2sro!4v1780063486710!5m2!1sen!2sro" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                     </div>
-                    <div class="col-md-3">
-                        <input type="text" name="guess2" class="form-control" placeholder="Locatie 2" required>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="p-4 bg-white rounded-4 shadow-sm">
+                        <h3 class="mb-4 text-center">De ce această tabără va fi EPICA</h3>
+                        <div class="row g-4 text-center">
+                            <div class="col-md-3">
+                                <div class="p-4 rounded-4 bg-primary bg-opacity-10 h-100">
+                                    <i class="fas fa-mountain fa-3x text-primary mb-3"></i>
+                                    <h6>Drumeții</h6>
+                                    <p class="mb-0 small">Explorează munții Carpați!</p>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="p-4 rounded-4 bg-success bg-opacity-10 h-100">
+                                    <i class="fas fa-flag-checkered fa-3x text-success mb-3"></i>
+                                    <h6>Karting</h6>
+                                    <p class="mb-0 small">Curse pline de adrenalină</p>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="p-4 rounded-4 bg-warning bg-opacity-10 h-100">
+                                    <i class="fas fa-mask fa-3x text-warning mb-3"></i>
+                                    <h6>Surpriza</h6>
+                                    <p class="mb-0 small">Ceva inedit te așteaptă</p>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="p-4 rounded-4 bg-info bg-opacity-10 h-100">
+                                    <i class="fas fa-heart fa-3x text-info mb-3"></i>
+                                    <h6>Comunitate</h6>
+                                    <p class="mb-0 small">Prietenii care vor dura</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-md-3">
-                        <input type="text" name="guess3" class="form-control" placeholder="Locatie 3" required>
-                    </div>
-                    <div class="col-md-3">
-                        <button type="submit" class="btn btn-primary">Trimite</button>
-                    </div>
-                </form>
-                    <?php endif; ?>
-                <?php else: ?>
-                <p class="text-muted">Trebuie să te autentifici pentru a trimite ghiciri.</p>
-                <a href="login.php" class="btn btn-outline-primary">Autentifică-te</a>
-                <?php endif; ?>
+                </div>
             </div>
         </div>
     </section>
