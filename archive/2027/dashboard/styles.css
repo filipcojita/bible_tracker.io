@@ -1,0 +1,302 @@
+/* base styles for site */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
+:root {
+    --camp-black: #101820;
+    --camp-red: #c8102e;
+    --camp-gold: #f5c96a;
+    --camp-blue: #183153;
+    --camp-sand: #f3efe7;
+    --camp-green: #1d7b57;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(180deg, #f7f1e8 0%, #eef3f7 100%);
+    color: var(--camp-black);
+    text-align: left;
+    font-family: 'Roboto', Arial, sans-serif;
+    line-height: 1.6;
+}
+
+.camp-navbar {
+    background: linear-gradient(135deg, var(--camp-black) 0%, var(--camp-blue) 48%, var(--camp-red) 100%) !important;
+    border-bottom: 3px solid rgba(245, 201, 106, 0.8);
+    box-shadow: 0 6px 18px rgba(16, 24, 32, 0.18);
+}
+
+.camp-navbar .navbar-brand {
+    font-weight: 700;
+    letter-spacing: 0.04em;
+}
+
+.camp-navbar .nav-link {
+    border-radius: 999px;
+    padding: 0.45rem 0.85rem;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.camp-navbar .nav-link:hover,
+.camp-navbar .nav-link.active {
+    background: rgba(245, 201, 106, 0.18);
+    color: #fff;
+    transform: translateY(-1px);
+}
+
+.camp-banner {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    background: linear-gradient(135deg, rgba(24, 49, 83, 0.12), rgba(200, 16, 46, 0.12));
+    border: 1px solid rgba(24, 49, 83, 0.18);
+    border-left: 5px solid var(--camp-red);
+    border-radius: 14px;
+    padding: 0.7rem 1rem;
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: var(--camp-black);
+}
+
+.camp-badge {
+    display: inline-block;
+    background: var(--camp-red);
+    color: white;
+    border-radius: 999px;
+    padding: 0.28rem 0.7rem;
+    font-size: 0.77rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.btn-primary,
+.btn-success,
+.btn-info,
+.btn-warning,
+.bg-primary {
+    background: linear-gradient(135deg, var(--camp-blue) 0%, var(--camp-red) 100%) !important;
+    border-color: transparent !important;
+    color: #fff !important;
+}
+
+.btn-primary:hover,
+.btn-success:hover,
+.btn-info:hover,
+.btn-warning:hover,
+.bg-primary:hover {
+    filter: brightness(1.05);
+}
+
+.btn-outline-light {
+    border-color: rgba(255, 255, 255, 0.65);
+}
+
+.btn-outline-light:hover {
+    background: rgba(245, 201, 106, 0.2);
+    border-color: var(--camp-gold);
+}
+
+#camp {
+    background: linear-gradient(135deg, rgba(16, 24, 32, 0.98) 0%, rgba(24, 49, 83, 0.96) 42%, rgba(200, 16, 46, 0.9) 100%);
+    border-color: rgba(245, 201, 106, 0.7) !important;
+    box-shadow: inset 0 0 0 1px rgba(245, 201, 106, 0.15);
+    color: #fff;
+}
+
+#camp h2,
+#camp h3,
+#camp h4,
+#camp h5,
+#camp h6,
+#camp p,
+#camp li,
+#camp .lead,
+#camp .alert,
+#camp .btn,
+#camp .card,
+#camp .bg-light,
+#camp .bg-white {
+    color: #fff;
+}
+
+#camp .alert-success {
+    background: rgba(245, 201, 106, 0.18);
+    border-color: rgba(245, 201, 106, 0.45);
+}
+
+#camp .btn-outline-primary {
+    border-color: var(--camp-gold);
+    color: var(--camp-gold);
+}
+
+#camp .btn-outline-primary:hover {
+    background: var(--camp-gold);
+    color: var(--camp-black);
+}
+
+#camp .text-primary,
+#camp .fa,
+#camp .fas,
+#camp .fab,
+#camp .bi {
+    color: var(--camp-gold) !important;
+}
+
+#camp .p-4.bg-white,
+#camp .bg-light,
+#camp .bg-white {
+    background: rgba(255, 255, 255, 0.08) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+#camp .card.bg-primary {
+    background: linear-gradient(135deg, #101820 0%, #c8102e 60%, #f5c96a 100%) !important;
+    border: 0;
+}
+
+#camp .card.bg-primary .card-body {
+    background: linear-gradient(135deg, rgba(16, 24, 32, 0.85), rgba(200, 16, 46, 0.82));
+}
+
+#countdown {
+    text-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+/* Shared navbar styling for dashboard, prayer wall, and leaderboard */
+.navbar {
+    margin-bottom: 0 !important;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+}
+
+.navbar-brand {
+    font-weight: 700;
+    letter-spacing: 0.02em;
+}
+
+.navbar-nav .nav-link {
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.95);
+}
+
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link.active {
+    color: #fff;
+    text-decoration: none;
+    background-color: rgba(255, 255, 255, 0.18);
+    border-radius: 999px;
+    padding: 0.5rem 0.85rem;
+}
+
+.welcome-message {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #fff;
+}
+
+.hero {
+    margin-top: 0;
+    background-size: cover;
+    background-position: top;
+    color: white;
+    padding: 120px 0;
+    position: relative;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.7);
+}
+
+.hero .btn {
+    text-shadow: none !important;
+    box-shadow: none !important;
+}
+
+.hero::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3));
+}
+
+.hero .container {
+    position: relative;
+    z-index: 1;
+}
+
+section {
+    padding: 60px 0;
+}
+
+.card {
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.qr img {
+    width: 400px;
+}
+
+.big {
+    font-size: 48px;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+.count {
+    font-size: 32px;
+    margin-top: 20px;
+}
+
+/* Leaderboard styling */
+
+.leaderboard-table {
+    font-size: 18px;
+}
+
+.rank {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+/* Medal colors */
+
+/* apply to row and each cell; helps override Bootstrap's cell backgrounds */
+.leaderboard-table tbody tr.gold,
+.leaderboard-table tbody tr.gold td {
+    background: linear-gradient(90deg,#fff8dc,#ffd70033) !important;
+    font-weight: 600;
+}
+
+.leaderboard-table tbody tr.silver,
+.leaderboard-table tbody tr.silver td {
+    background: linear-gradient(90deg,#f8f9fa,#c0c0c033) !important;
+    font-weight: 600;
+}
+
+.leaderboard-table tbody tr.bronze,
+.leaderboard-table tbody tr.bronze td {
+    background: linear-gradient(90deg,#fdf6ec,#cd7f3233) !important;
+    font-weight: 600;
+}
+
+/* Logged user highlight */
+
+.current-user {
+    border-left: 6px solid #1e8035;
+    background-color: #e9f9ee !important;
+}
+
+/* Slight hover effect */
+
+.leaderboard-table tbody tr:hover {
+    transform: scale(1.01);
+    transition: 0.15s;
+}
+
+/* Hide extra submission dates until the user clicks "Show more" */
+.submission-item.hidden {
+    display: none;
+}

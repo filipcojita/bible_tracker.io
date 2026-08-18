@@ -2,9 +2,10 @@
 This website was created to support the youth ministry of Biserica Speranța – **ACASA (#tineretSperanta)**. The camp season has now ended, so the project has been reorganized into a year-based archive structure to keep future work clean and separate.
 
 ## Project structure
-- `archive/2026/` – the complete archived version of the 2026 camp website and app files
+- `archive/2026/` – the completed archived version of the 2026 camp website and app files
+- `archive/2027/` – the active project branch for the 2027 Germany camp edition
 - `docs/` – supporting project documentation and notes
-- `index.php` – redirect entry point to the archived project
+- `index.php` – redirect entry point to the active 2027 project
 
 ## Bible Tracker feature
 - Young people read the Bible every day and submit a brief reflection.

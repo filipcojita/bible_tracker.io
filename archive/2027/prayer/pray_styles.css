@@ -1,0 +1,562 @@
+/**
+ * Prayer Wall Styles
+ * pray_styles.css
+ */
+
+/* ============================================
+   Prayer Wall Main Styles
+   ============================================ */
+
+.prayer-wall-title {
+    color: #101820;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    font-size: 2.5rem;
+    letter-spacing: 0.02em;
+}
+
+body {
+    background: linear-gradient(180deg, #f7f1e8 0%, #eef3f7 100%);
+}
+
+/* ============================================
+   Category Tabs
+   ============================================ */
+
+.prayer-tabs-container {
+    background: linear-gradient(135deg, rgba(24, 49, 83, 0.08), rgba(200, 16, 46, 0.08));
+    border-radius: 12px;
+    padding: 1rem;
+    border: 1px solid rgba(16, 24, 32, 0.08);
+}
+
+.prayer-tabs {
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.prayer-tab {
+    border-radius: 8px;
+    padding: 0.75rem 1.5rem;
+    background-color: #fff;
+    color: #2c3e50;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.prayer-tab:hover {
+    background-color: #ecf0f1;
+    transform: translateY(-2px);
+}
+
+.prayer-tab.active {
+    background: linear-gradient(135deg, #101820 0%, #183153 42%, #c8102e 100%);
+    color: #fff;
+    border-color: #f5c96a;
+    box-shadow: 0 8px 18px rgba(16, 24, 32, 0.15);
+}
+
+/* Category colors */
+.category-lauda { color: #ff6b6b; }
+.category-multumire { color: #4ecdc4; }
+.category-cerere { color: #ff8787; }
+.category-mijlocire { color: #95e1d3; }
+.category-marturisire { color: #dda15e; }
+
+.category-badge {
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+.category-badge.category-lauda { background-color: rgba(255, 107, 107, 0.2); }
+.category-badge.category-multumire { background-color: rgba(78, 205, 196, 0.2); }
+.category-badge.category-cerere { background-color: rgba(255, 135, 135, 0.2); }
+.category-badge.category-mijlocire { background-color: rgba(149, 225, 211, 0.2); }
+.category-badge.category-marturisire { background-color: rgba(221, 161, 94, 0.2); }
+
+.category-header {
+    color: #2c3e50;
+    font-weight: 700;
+    padding-bottom: 1rem;
+    border-bottom: 3px solid #ecf0f1;
+}
+
+/* ============================================
+   Prayer Cards
+   ============================================ */
+
+.prayer-card {
+    background: #fff;
+    border-radius: 12px;
+    border: 1px solid #ecf0f1;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.prayer-card:hover {
+    box-shadow: 0 8px 24px rgba(16, 24, 32, 0.15);
+    transform: translateY(-4px);
+    border-color: rgba(200, 16, 46, 0.45);
+}
+
+.prayer-card-header {
+    padding: 1.5rem 1.5rem 1rem;
+    border-bottom: 1px solid #ecf0f1;
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    justify-content: space-between;
+}
+
+.prayer-card-title {
+    margin: 0;
+    color: #2c3e50;
+    font-weight: 700;
+    flex: 1;
+    line-height: 1.4;
+    word-break: break-word;
+    font-size: 1.1rem;
+}
+
+.prayer-card-body {
+    padding: 1rem 1.5rem;
+    flex-grow: 1;
+}
+
+.prayer-card-footer {
+    padding: 1rem 1.5rem;
+    border-top: 1px solid #ecf0f1;
+    background-color: #f8f9fa;
+}
+
+.emoticons-summary {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.emoticon-count {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    background: #e8eaf6;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #3f51b5;
+}
+
+.prayer-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+    justify-content: space-between;
+}
+
+.prayer-actions .btn {
+    min-width: 100px;
+}
+
+.prayer-actions .btn:not(:last-child) {
+    margin-right: 0.25rem;
+}
+
+.prayer-actions .badge {
+    flex-shrink: 0;
+}
+
+.see-details {
+    flex: 1 1 auto;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.see-details:hover {
+    transform: translateX(2px);
+}
+
+/* ============================================
+   Modals
+   ============================================ */
+
+.prayer-modal {
+    display: none;
+    position: fixed;
+    z-index: 1050;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    animation: fadeIn 0.3s ease;
+}
+
+.prayer-modal.show {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.prayer-modal-content {
+    background-color: #fff;
+    padding: 0;
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    width: 90%;
+    max-width: 600px;
+    max-height: 90vh;
+    overflow-y: auto;
+    animation: slideUp 0.3s ease;
+}
+
+.prayer-details-modal {
+    max-width: 700px;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.prayer-modal-header {
+    padding: 1.5rem;
+    border-bottom: 1px solid #ecf0f1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.prayer-modal-header .modal-title {
+    margin: 0;
+    color: #2c3e50;
+    font-weight: 700;
+}
+
+.prayer-modal .btn-close {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #95a5a6;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.prayer-modal .btn-close:hover {
+    color: #2c3e50;
+}
+
+.modal-body {
+    padding: 1.5rem;
+}
+
+.modal-footer {
+    padding: 1rem 1.5rem;
+    border-top: 1px solid #ecf0f1;
+    display: flex;
+    gap: 0.5rem;
+    justify-content: flex-end;
+}
+
+/* ============================================
+   Form Elements
+   ============================================ */
+
+.form-control,
+.form-select {
+    border-radius: 8px;
+    border: 2px solid #ecf0f1;
+    padding: 0.75rem;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.form-label {
+    color: #2c3e50;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.form-check-label {
+    color: #2c3e50;
+    margin-left: 0.5rem;
+}
+
+/* ============================================
+   Emoticon Picker
+   ============================================ */
+
+.emoticon-picker {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding: 1rem;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #ecf0f1;
+}
+
+.emoticon-btn {
+    background: #fff;
+    border: 2px solid #ecf0f1;
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.emoticon-btn:hover {
+    transform: scale(1.15);
+    border-color: #667eea;
+    background-color: #f0f4ff;
+}
+
+/* ============================================
+   Prayer Details Modal
+   ============================================ */
+
+.prayer-details-content {
+    padding: 1rem 0;
+}
+
+#detailsRequestTitle {
+    color: #2c3e50;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+}
+
+.prayer-meta {
+    background-color: #f8f9fa;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+}
+
+.prayer-meta .text-muted {
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #95a5a6 !important;
+    margin-bottom: 0.5rem;
+}
+
+.prayer-meta strong {
+    color: #2c3e50;
+    font-size: 1rem;
+}
+
+.prayer-reactions {
+    background-color: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+}
+
+.prayer-reactions .form-label {
+    color: #2c3e50;
+    margin-bottom: 1rem;
+}
+
+/* ============================================
+   Praying Button
+   ============================================ */
+
+.prayer-praying {
+    background-color: #e8f5e9;
+    padding: 1.5rem;
+    border-radius: 8px;
+    border-left: 4px solid #4caf50;
+}
+
+#prayingForYouBtn {
+    width: 100%;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+#prayingForYouBtn:not(.active) {
+    border-color: #667eea;
+    color: #667eea;
+}
+
+#prayingForYouBtn:not(.active):hover {
+    background-color: rgba(102, 126, 234, 0.1);
+}
+
+#prayingForYouBtn.active {
+    background-color: #4caf50;
+    border-color: #4caf50;
+    color: #fff;
+}
+
+#prayingForYouBtn.active:hover {
+    background-color: #45a049;
+}
+
+.prayer-praying .btn-link {
+    padding: 0 !important;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.prayer-praying .btn-link:hover {
+    text-decoration: underline;
+}
+
+.prayingList {
+    background: #fff;
+    border-radius: 8px;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.prayingList .list-group-item {
+    border-left: 3px solid #667eea;
+    color: #2c3e50;
+    font-weight: 500;
+}
+
+/* ============================================
+   Messages and Alerts
+   ============================================ */
+
+.alert {
+    border-radius: 8px;
+    border: none;
+    margin-bottom: 0;
+}
+
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.alert-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.alert-info {
+    background-color: #d1ecf1;
+    color: #0c5460;
+}
+
+.btn-close {
+    color: inherit;
+    opacity: 0.7;
+}
+
+/* ============================================
+   Responsive Design
+   ============================================ */
+
+@media (max-width: 768px) {
+    .prayer-wall-title {
+        font-size: 1.8rem;
+    }
+    
+    .prayer-modal-content {
+        width: 95%;
+        max-height: 95vh;
+    }
+    
+    .prayer-tabs {
+        justify-content: center;
+    }
+    
+    .prayer-tab {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+    }
+    
+    .prayer-card-header {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .prayer-actions {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+    
+    .see-details {
+        width: 100%;
+    }
+    
+    .prayer-details-content {
+        padding: 1rem;
+    }
+    
+    .emoticon-picker {
+        gap: 0.25rem;
+    }
+    
+    .emoticon-btn {
+        padding: 0.5rem 0.75rem;
+        font-size: 1.2rem;
+    }
+    
+    @keyframes slideUp {
+        from {
+            transform: translateY(100px);
+        }
+        to {
+            transform: translateY(0);
+        }
+    }
+}
+
+/* ============================================
+   Utility Classes
+   ============================================ */
+
+.d-none {
+    display: none !important;
+}
+
+.modal-open {
+    overflow: hidden;
+}
+
+.text-muted {
+    color: #95a5a6 !important;
+}
+
+.form-text {
+    font-size: 0.875rem;
+    color: #7f8c8d;
+}
