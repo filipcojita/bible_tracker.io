@@ -75,12 +75,13 @@ if ($displayYear > $currentYear ||
 ?>
 
 <style>
-/* ✅ YOUR ORIGINAL STYLES (UNCHANGED) */
 .sermon-calendar-container {
-    background-color: #f8f9fa;
-    border-radius: 8px;
+    background: linear-gradient(180deg, rgba(16,24,32,0.96) 0%, rgba(24,49,83,0.98) 100%);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 20px;
     padding: 20px;
     margin-top: 20px;
+    box-shadow: 0 18px 35px rgba(16,24,32,0.18);
 }
 
 .sermon-calendar-header {
@@ -88,118 +89,137 @@ if ($displayYear > $currentYear ||
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
+    gap: 12px;
+    flex-wrap: wrap;
 }
 
 .sermon-calendar-header h3 {
     margin: 0;
-    font-size: 1.3rem;
-    font-weight: bold;
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: #fff;
 }
 
 .sermon-calendar-nav {
     display: flex;
     gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
 }
 
 .sermon-calendar-nav button {
-    padding: 5px 12px;
-    border: 1px solid #dee2e6;
-    background-color: white;
-    border-radius: 5px;
+    padding: 7px 14px;
+    border: 1px solid rgba(255,255,255,0.18);
+    background: rgba(255,255,255,0.08);
+    border-radius: 999px;
     cursor: pointer;
-    font-weight: bold;
+    font-weight: 700;
     transition: all 0.3s;
+    color: #fff;
 }
 
 .sermon-calendar-nav button:hover {
-    background-color: #007bff;
+    background: linear-gradient(135deg, var(--camp-red) 0%, var(--camp-red-dark) 100%);
+    border-color: transparent;
     color: white;
-    border-color: #007bff;
 }
 
 .sermon-calendar-nav button:disabled {
-    opacity: 0.5;
+    opacity: 0.45;
     cursor: not-allowed;
+}
+
+.sermon-calendar-nav span {
+    color: #eef5ff;
+    font-weight: 700;
+    padding: 5px 10px;
 }
 
 .sermon-calendar-table {
     width: 100%;
     border-collapse: collapse;
-    background-color: white;
-    border-radius: 8px;
+    background-color: rgba(255,255,255,0.96);
+    border-radius: 12px;
     overflow: hidden;
 }
 
 .sermon-calendar-table th {
-    background-color: #007bff;
+    background: linear-gradient(135deg, #101820 0%, #183153 50%, #c8102e 100%);
     color: white;
     padding: 12px;
     text-align: center;
-    font-weight: bold;
+    font-weight: 700;
 }
 
 .sermon-calendar-table td {
     padding: 10px;
-    border: 1px solid #dee2e6;
+    border: 1px solid #dde5ee;
     text-align: center;
-    height: 60px;
+    height: 70px;
     position: relative;
+    background: rgba(248,250,252,0.9);
 }
 
 .sermon-calendar-day {
     cursor: pointer;
-    border-radius: 5px;
+    border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
     height: 100%;
-    font-weight: 500;
+    font-weight: 700;
     transition: all 0.3s;
     position: relative;
+    background: #edf5ff;
+    color: #10213a;
 }
 
 .sermon-calendar-day.other-month {
-    background-color: #f0f0f0;
-    color: #999;
+    background-color: #f0f3f7;
+    color: #9aa5b1;
     cursor: default;
 }
 
 .sermon-calendar-day.selectable {
-    background-color: #e7f3ff;
-    border: 2px solid #007bff;
+    background: linear-gradient(135deg, #edf5ff 0%, #dbeeff 100%);
+    border: 2px solid #1d5ea8;
+    color: #12345b;
 }
 
 .sermon-calendar-day.selectable:hover {
-    background-color: #cfe8ff;
+    background: linear-gradient(135deg, #dbeeff 0%, #bfdfff 100%);
 }
 
 .sermon-calendar-day.submitted {
-    background-color: #28a745;
+    background: linear-gradient(135deg, #c8102e 0%, #9d0c24 100%);
     color: white;
 }
 
 .sermon-calendar-day.submitted::after {
     content: "✓";
     position: absolute;
-    font-size: 1.2rem;
+    right: 8px;
+    bottom: 5px;
+    font-size: 0.8rem;
 }
 
 .sermon-calendar-day.submitted:hover {
-    background-color: #218838;
+    filter: brightness(1.04);
 }
 
 .sermon-calendar-day.future {
-    color: #999;
+    color: #9aa5b1;
     cursor: default;
+    background: #f5f7fa;
 }
 
 .sermon-calendar-day.today {
-    border: 3px solid #ffc107;
-    font-weight: bold;
+    border: 3px solid #f3c853;
+    font-weight: 800;
 }
 
 .empty-cell {
-    background-color: #f9f9f9;
+    background-color: #f3f6fb;
     cursor: default;
 }
 </style>

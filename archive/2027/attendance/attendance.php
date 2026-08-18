@@ -11,13 +11,23 @@ date_default_timezone_set("Europe/Bucharest");
 function showMessage($message, $imageFile) {
     echo "<!DOCTYPE html><html lang=\"ro\"><head>\n" .
          "<meta charset=\"UTF-8\">\n" .
+         "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n" .
          "<title>Check-in</title>\n" .
          "<link href=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css\" rel=\"stylesheet\">\n" .
-         "<style>body{background:#111;color:white;text-align:center;font-family:Arial;} .status-img{max-width:80%;height:auto;margin-top:20px;}</style>\n" .
+         "<style>\n" .
+         "body { margin:0; min-height:100vh; display:flex; align-items:center; justify-content:center; background:linear-gradient(135deg, #101820 0%, #183153 45%, #c8102e 100%); color:#fff; font-family:Arial,sans-serif; }\n" .
+         ".status-card { background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.14); border-radius: 24px; padding: 32px 28px; box-shadow: 0 18px 40px rgba(0,0,0,0.18); max-width: 540px; width: min(90vw, 540px); text-align:center; }\n" .
+         ".status-badge { display:inline-block; background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.18); border-radius: 999px; letter-spacing: 0.12em; text-transform: uppercase; padding: 8px 14px; font-size: 0.72rem; margin-bottom: 18px; }\n" .
+         ".status-img { max-width: 220px; height:auto; margin-bottom: 18px; border-radius: 16px; }\n" .
+         "h1 { font-size: clamp(1.8rem, 3vw, 2.7rem); font-weight:800; margin:0; }\n" .
+         "p { margin: 12px 0 0; color: #e7edf8; font-size: 1.05rem; }\n" .
+         "</style>\n" .
          "</head><body>\n" .
-         "<div class='container mt-5'>" .
+         "<div class='status-card'>" .
+         "<div class='status-badge'>ACASĂ • Tabăra 2027</div>" .
          "<img src=\"/images/" . htmlspecialchars($imageFile) . "\" alt=\"status\" class=\"status-img\">" .
-         "<h1 class='mt-4'>" . htmlspecialchars($message) . "</h1>" .
+         "<h1>" . htmlspecialchars($message) . "</h1>" .
+         "<p>Germania te așteaptă.</p>" .
          "</div></body></html>";
     exit;
 }
