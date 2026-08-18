@@ -6,7 +6,7 @@ include 'auth.php';
 checkPersistentLogin();
 
 if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
-    header("Location: login.php");
+    header("Location: /auth/login.php");
     exit();
 }
 

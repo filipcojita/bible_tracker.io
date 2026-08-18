@@ -6,7 +6,7 @@ require_once __DIR__ . '/../core/auth.php';
 checkPersistentLogin();
 
 if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
-    header("Location: ../auth/login.php");
+    header("Location: /auth/login.php");
     exit();
 }
 
@@ -156,7 +156,7 @@ $overallStats = $conn->query($overallStatsSql)->fetch_assoc();
 
 <nav class="navbar navbar-expand-lg navbar-dark camp-navbar">
     <div class="container-fluid">
-        <a class="navbar-brand" href="../dashboard/dashboard.php">Bible Tracker - Admin</a>
+        <a class="navbar-brand" href="/dashboard/dashboard.php">Bible Tracker - Admin</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -164,13 +164,13 @@ $overallStats = $conn->query($overallStatsSql)->fetch_assoc();
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto align-items-center">
                 <li class="nav-item">
-                    <a class="nav-link" href="admin.php"><i class="bi bi-gear"></i> Panou General</a>
+                    <a class="nav-link" href="/admin/admin.php"><i class="bi bi-gear"></i> Panou General</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="../dashboard/dashboard.php"><i class="bi bi-house"></i> Dashboard</a>
+                    <a class="nav-link" href="/dashboard/dashboard.php"><i class="bi bi-house"></i> Dashboard</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="../auth/logout.php"><i class="bi bi-box-arrow-right"></i> Deconectează-te</a>
+                    <a class="nav-link" href="/auth/logout.php"><i class="bi bi-box-arrow-right"></i> Deconectează-te</a>
                 </li>
             </ul>
         </div>

@@ -7,7 +7,7 @@ checkPersistentLogin();
 
 // Only admin can access
 if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
-    header("Location: login.php");
+    header("Location: /auth/login.php");
     exit();
 }
 
@@ -71,7 +71,7 @@ $submission = $result->fetch_assoc();
     </div>
 
     <div class="mt-4 text-center">
-        <a href="admin.php" class="btn btn-secondary">⬅ Înapoi la Admin</a>
+        <a href="/admin/admin.php" class="btn btn-secondary">⬅ Înapoi la Admin</a>
     </div>
 </div>
 

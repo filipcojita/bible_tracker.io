@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 setcookie('remember_token', $token, time() + (30 * 24 * 60 * 60), "/"); // 30 days
             }
 
-            header("Location: ../dashboard/dashboard.php");
+            header("Location: /dashboard/dashboard.php");
             exit();
         } else {
             echo "Parolă incorectă!";
@@ -84,7 +84,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <h3>Autentifică-te</h3>
                 </div>
                 <div class="card-body">
-                    <form action="login.php" method="POST">
+                    <form action="/auth/login.php" method="POST">
                         <div class="mb-3">
                             <label for="username" class="form-label">Nume utilizator</label>
                             <input type="text" class="form-control" id="username" name="username" required>
@@ -104,7 +104,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     </form>
                 </div>
                 <div class="card-footer text-center">
-                    <p>Nu ai un cont? <a href="register.php">Înregistrează-te aici</a></p>
+                    <p>Nu ai un cont? <a href="/auth/register.php">Înregistrează-te aici</a></p>
                 </div>
             </div>
         </div>

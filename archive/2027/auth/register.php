@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Insert the new user into the database
             $insert_query = "INSERT INTO users (username, password) VALUES ('$username', '$hashed_password')";
             if (mysqli_query($conn, $insert_query)) {
-                header('Location: login.php');
+                header('Location: /auth/login.php');
                 exit();
             } else {
                 $error = "Eroare la crearea contului. Încercați din nou.";
@@ -109,7 +109,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     </form>
                 </div>
                 <div class="card-footer text-center">
-                    <p>Ai deja un cont? <a href="login.php">Autentifică-te aici</a></p>
+                    <p>Ai deja un cont? <a href="/auth/login.php">Autentifică-te aici</a></p>
                 </div>
             </div>
         </div>

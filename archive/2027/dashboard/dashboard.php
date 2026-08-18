@@ -6,7 +6,7 @@ require_once __DIR__ . '/../core/auth.php';
 checkPersistentLogin();
 
 if (!isset($_SESSION['user_id'])) {
-    header('Location: ../auth/login.php');
+    header('Location: /auth/login.php');
     exit();
 }
 
@@ -127,10 +127,10 @@ $show_all_button = count($submitted_dates) > 5;
             <?php endif; ?>
 
             <div class="mt-3">
-                <a href="qr_scanner.php" class="btn btn-success me-2 mb-2"><i class="bi bi-camera"></i> Deschide Cameră</a>
-                <a href="../leaderboard/leaderboard.php" class="btn btn-info me-2 mb-2"><i class="bi bi-trophy"></i> Vezi Clasamentul</a>
+                <a href="/dashboard/qr_scanner.php" class="btn btn-success me-2 mb-2"><i class="bi bi-camera"></i> Deschide Cameră</a>
+                <a href="/leaderboard/leaderboard.php" class="btn btn-info me-2 mb-2"><i class="bi bi-trophy"></i> Vezi Clasamentul</a>
                 <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
-                    <a href="../admin/admin.php" class="btn btn-warning mb-2"><i class="bi bi-gear"></i> Panou Admin</a>
+                    <a href="/admin/admin.php" class="btn btn-warning mb-2"><i class="bi bi-gear"></i> Panou Admin</a>
                 <?php endif; ?>
             </div>
         </div>

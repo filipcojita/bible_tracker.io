@@ -26,7 +26,7 @@ session_start();
                 <div class="card-body">
                     <h5 class="card-title">Autentificare</h5>
                     <p class="card-text">Ești deja membru? Autentifică-te pentru a trimite citirile biblice și a-ți urmări progresul.</p>
-                    <a href="login.php" class="btn btn-primary">Autentifică-te</a>
+                    <a href="/auth/login.php" class="btn btn-primary">Autentifică-te</a>
                 </div>
             </div>
         </div>
@@ -36,7 +36,7 @@ session_start();
                 <div class="card-body">
                     <h5 class="card-title">Înregistrează-te</h5>
                     <p class="card-text">Nou aici? Înscrie-te pentru a începe să trimiți reflecțiile biblice și a te alătura grupului.</p>
-                    <a href="register.php" class="btn btn-secondary">Înregistrează-te</a>
+                    <a href="/auth/register.php" class="btn btn-secondary">Înregistrează-te</a>
                 </div>
             </div>
         </div>

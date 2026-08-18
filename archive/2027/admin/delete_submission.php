@@ -3,7 +3,7 @@ include 'db.php';
 session_start();
 
 if (!isset($_SESSION['admin'])) {
-    header("Location: login.php");
+    header("Location: /auth/login.php");
     exit();
 }
 
@@ -21,6 +21,6 @@ if (isset($_GET['id'])) {
     }
 }
 
-header("Location: admin.php");
+header("Location: /admin/admin.php");
 exit();
 ?>

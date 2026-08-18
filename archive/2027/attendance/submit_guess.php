@@ -6,7 +6,7 @@ session_start();
 checkPersistentLogin();
 
 if (!isset($_SESSION['user_id'])) {
-    header("Location: login.php");
+    header("Location: /auth/login.php");
     exit();
 }
 
@@ -71,7 +71,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
                 <div class="card-body text-center">
                     <p>Mulțumim pentru ghiciri! Vom dezvălui locația mai târziu.</p>
-                    <a href="index.php" class="btn btn-primary">Înapoi la Acasă</a>
+                    <a href="/public/index.php" class="btn btn-primary">Înapoi la Acasă</a>
                 </div>
             </div>
         </div>

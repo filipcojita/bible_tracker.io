@@ -5,7 +5,7 @@ include 'auth.php';
 checkPersistentLogin();
 
 if (!isset($_SESSION['user_id'])) {
-    header('Location: login.php');
+    header('Location: /auth/login.php');
     exit();
 }
 ?>
@@ -63,7 +63,7 @@ if (!isset($_SESSION['user_id'])) {
 
     <br><br>
 
-    <a href="dashboard.php" class="btn btn-secondary">Înapoi la Dashboard</a>
+    <a href="/dashboard/dashboard.php" class="btn btn-secondary">Înapoi la Dashboard</a>
 
 </div>
 

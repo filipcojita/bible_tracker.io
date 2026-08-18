@@ -39,7 +39,7 @@ checkPersistentLogin();
 </nav>
 
 <!-- hero section -->
-<header class="hero" style="margin-top: 0; background-image:url('images/hero.jpeg');">
+<header class="hero" style="margin-top: 0; background-image:url('../images/hero.jpeg');">
     <div class="container text-center">
         <h1 class="display-4 fw-bold">Bun venit ACASĂ!</h1>
         <p class="lead mb-4">#tineretSperanta - comunitatea tinerilor din Biserica Baptistă Speranța Arad</p>
@@ -50,87 +50,16 @@ checkPersistentLogin();
 <main>
     <section id="camp" class="py-5 border border-primary rounded mx-3 my-4">
         <div class="container">
-            <div class="row align-items-center gy-4 mb-5">
-                <div class="col-lg-6">
-                    <h2 class="mb-4"><i class="fas fa-campground text-primary me-2"></i>Tabara 2027: 13-22 August • Germania</h2>
-                    <p class="lead">Vacanța noastră de vară va avea loc în Germania, într-un loc de poveste, între munți, păduri și tradiție europeană, unde fiecare zi va fi plină de viață, team-building și momente memorabile.</p>
-                    <div class="alert alert-success rounded-4 shadow-sm border-0" role="alert">
-                        <h5 class="mb-2">Felicitări celor care ați ghicit!</h5>
-                        <p class="mb-2">Mulțumim tuturor pentru imaginație și pentru participare. Anul acesta, Germania ne deschide porțile pentru o experiență de neuitat, plină de adrenalină, rugăciune și prietenie.</p>
-                        <a href="https://maps.google.com/?q=Germany" target="_blank" rel="noopener" class="btn btn-outline-primary btn-sm">Deschide harta Germaniei</a>
-                    </div>
-                    <div class="p-4 bg-white rounded-4 shadow-sm mb-4">
-                        <h5 class="mb-3">Ce te așteaptă</h5>
-                        <ul class="list-unstyled mb-0">
-                            <li class="mb-3"><i class="fas fa-mountain text-primary me-2"></i><strong>Drumeții montane</strong> prin peisajele Carpaților</li>
-                            <li class="mb-3"><i class="fas fa-road text-primary me-2"></i><strong>Karting</strong> și adrenalină</li>
-                            <li class="mb-3"><i class="fas fa-music text-primary me-2"></i><strong>Seri de laudă și închinare</strong> cu echipa noastră de închinare și invitați speciali</li>
-                            <li class="mb-3"><i class="fas fa-book text-primary me-2"></i><strong>Studiu și timp de partajare</strong> împreună în intimitate spirituală</li>
-                            <li class="mb-3"><i class="fas fa-pray text-primary me-2"></i><strong>Rugăciune și reflecție</strong> într-o atmosferă calmă</li>
-                            <li class="mb-3"><i class="fas fa-fire text-primary me-2"></i><strong>Foc de tabără</strong> în ultima seară cu povești și cântece</li>
-                            <li class="mb-3"><i class="fas fa-star text-primary me-2"></i><strong>Un eveniment deosebit</strong> pe o seară pe care nu o vei uita</li>
-                            <li class="mb-0"><i class="fas fa-heart text-primary me-2"></i><strong>Comunitate autentică</strong> și prietenii care vor dura</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-6">
+            <div class="row justify-content-center align-items-center gy-4 mb-5">
+                <div class="col-lg-8">
                     <div class="card bg-primary text-white border-0 shadow-lg">
                         <div class="card-body p-5 text-center" style="background: linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%);">
+                            <h2 class="mb-3"><i class="fas fa-campground me-2"></i>Tabăra 2027</h2>
+                            <p class="lead text-white-75 mb-4">13-22 August • Germania</p>
                             <h5 class="card-title mb-3">NUMĂRĂTOAREA INVERSĂ</h5>
                             <p class="text-white-50 mb-4">Zile până la cea mai frumoasă experiență a verii</p>
                             <div id="countdown" class="display-4 fw-bold text-white" style="letter-spacing: 2px; line-height: 1.2;"></div>
                             <p class="mt-4 mb-0 text-white-75">Germania te așteaptă</p>
-                        </div>
-                    </div>
-                    <div class="mt-4 p-4 bg-light rounded-4 shadow-sm">
-                        <h6 class="mb-3">Despre zona în care mergem:</h6>
-                        <p class="mb-0">Germania este cunoscută pentru peisajele sale curate, orașele pline de istorie și natura spectaculoasă. De la munți la păduri și sate pitorești, această țară ne oferă un cadru ideal pentru o tabără plină de autenticitate, aventură și pace sufletească.</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="row mb-4">
-                <div class="col-12">
-                    <h4 class="mb-4 text-center">Tabara ta pentru 10 zile memorabile</h4>
-                    <div class="rounded-4 overflow-hidden shadow-lg">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d727150.22705297!2d25.979569989711337!3d45.7229707447215!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40b35f3aa6674201%3A0x3db2506e3152d311!2sKastel%20Transylvania!5e0!3m2!1sen!2sro!4v1780063486710!5m2!1sen!2sro" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-12">
-                    <div class="p-4 bg-white rounded-4 shadow-sm">
-                        <h3 class="mb-4 text-center">De ce această tabără va fi EPICA</h3>
-                        <div class="row g-4 text-center">
-                            <div class="col-md-3">
-                                <div class="p-4 rounded-4 bg-primary bg-opacity-10 h-100">
-                                    <i class="fas fa-mountain fa-3x text-primary mb-3"></i>
-                                    <h6>Drumeții</h6>
-                                    <p class="mb-0 small">Explorează munții Carpați!</p>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="p-4 rounded-4 bg-success bg-opacity-10 h-100">
-                                    <i class="fas fa-flag-checkered fa-3x text-success mb-3"></i>
-                                    <h6>Karting</h6>
-                                    <p class="mb-0 small">Curse pline de adrenalină</p>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="p-4 rounded-4 bg-warning bg-opacity-10 h-100">
-                                    <i class="fas fa-mask fa-3x text-warning mb-3"></i>
-                                    <h6>Surpriza</h6>
-                                    <p class="mb-0 small">Ceva inedit te așteaptă</p>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="p-4 rounded-4 bg-info bg-opacity-10 h-100">
-                                    <i class="fas fa-heart fa-3x text-info mb-3"></i>
-                                    <h6>Comunitate</h6>
-                                    <p class="mb-0 small">Prietenii care vor dura</p>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -146,7 +75,7 @@ checkPersistentLogin();
                     <p class="lead">ACASĂ este grupul de tineri al Bisericii Speranța. Ne întâlnim pentru a studia Cuvântul, a ne ruga împreună și a construi relații bazate pe credință și prietenie. Fie că ești nou sau ai fost cu noi de mult timp, ești binevenit.</p>
                 </div>
                 <div class="col-lg-6">
-                    <img src="images/stage.jpeg" class="img-fluid rounded shadow" alt="Tineri ACASA">
+                    <img src="../images/stage.jpeg" class="img-fluid rounded shadow" alt="Tineri ACASA">
                 </div>
             </div>
         </div>
@@ -178,7 +107,7 @@ checkPersistentLogin();
                     </ul>
                 </div>
                 <div class="col-lg-6">
-                    <img src="images/poland.jpeg" class="img-fluid rounded shadow" alt="Activități ACASA">
+                    <img src="../images/poland.jpeg" class="img-fluid rounded shadow" alt="Activități ACASA">
                 </div>
             </div>
         </div>

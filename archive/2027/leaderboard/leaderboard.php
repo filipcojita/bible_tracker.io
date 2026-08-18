@@ -6,7 +6,7 @@ require_once __DIR__ . '/../core/auth.php';
 checkPersistentLogin();
 
 if (!isset($_SESSION['user_id'])) {
-    header('Location: ../auth/login.php');
+    header('Location: /auth/login.php');
     exit();
 }
 
@@ -128,9 +128,9 @@ endwhile;
 
 <div class="text-center mt-4 d-flex justify-content-center gap-3">
 
-<a href="../dashboard/dashboard.php" class="btn btn-primary btn-lg"><i class="bi bi-send"></i> Trimite un răspuns</a>
+<a href="/dashboard/dashboard.php" class="btn btn-primary btn-lg"><i class="bi bi-send"></i> Trimite un răspuns</a>
 
-<a href="../public/index.php" class="btn btn-outline-secondary btn-lg"><i class="bi bi-house"></i> Acasă</a>
+<a href="/public/index.php" class="btn btn-outline-secondary btn-lg"><i class="bi bi-house"></i> Acasă</a>
 
 </div>
 

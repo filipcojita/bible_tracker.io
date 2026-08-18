@@ -16,6 +16,6 @@ session_destroy();  // Destroy the session
 // Clear the remember cookie
 setcookie('remember_token', '', time() - 3600, "/");
 
-header('Location: login.php'); // Redirect to the login page
+header('Location: /auth/login.php'); // Redirect to the login page
 exit();
 ?>

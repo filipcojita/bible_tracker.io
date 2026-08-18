@@ -16,7 +16,7 @@ function showMessage($message, $imageFile) {
          "<style>body{background:#111;color:white;text-align:center;font-family:Arial;} .status-img{max-width:80%;height:auto;margin-top:20px;}</style>\n" .
          "</head><body>\n" .
          "<div class='container mt-5'>" .
-         "<img src=\"images/" . htmlspecialchars($imageFile) . "\" alt=\"status\" class=\"status-img\">" .
+         "<img src=\"/images/" . htmlspecialchars($imageFile) . "\" alt=\"status\" class=\"status-img\">" .
          "<h1 class='mt-4'>" . htmlspecialchars($message) . "</h1>" .
          "</div></body></html>";
     exit;
@@ -39,7 +39,7 @@ function getRandomImage($folder) {
 }
 
 if (!isset($_SESSION['user_id'])) {
-    header("Location: login.php");
+    header("Location: /auth/login.php");
     exit();
 }
 

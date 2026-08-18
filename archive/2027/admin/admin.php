@@ -7,7 +7,7 @@ checkPersistentLogin();
 
 // Only admin access
 if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
-    header("Location: ../auth/login.php");
+    header("Location: /auth/login.php");
     exit();
 }
 
@@ -217,8 +217,8 @@ if (isset($_GET['user_id']) && is_numeric($_GET['user_id'])) {
 
     <!-- NAVIGATION -->
     <div class="mt-4 text-center">
-        <a href="../dashboard/dashboard.php" class="btn btn-secondary">⬅ Înapoi la Dashboard</a>
-        <a href="../auth/logout.php" class="btn btn-danger">🔴 Deconectează-te</a>
+        <a href="/dashboard/dashboard.php" class="btn btn-secondary">⬅ Înapoi la Dashboard</a>
+        <a href="/auth/logout.php" class="btn btn-danger">🔴 Deconectează-te</a>
     </div>
 
 </div>
