@@ -4,6 +4,56 @@ require_once __DIR__ . '/../core/auth.php';
 session_start();
 
 checkPersistentLogin();
+
+$aboutSlides = [
+    [
+        'src' => '../images/home/hero.jpg',
+        'alt' => 'Hero ACASĂ',
+        'title' => 'ACASĂ',
+        'description' => 'Crăciunul Tinerilor 2025'
+    ],
+    [
+        'src' => '../images/travel/maramures-church-room.jpg',
+        'alt' => 'Sala de tineret din Maramureș',
+        'title' => 'Închinare prin Cuvânt',
+        'description' => 'Tabăra Maramureș 2024'
+    ],
+    [
+        'src' => '../images/travel/maramures-hero-church-room.jpg',
+        'alt' => 'Camera de rugăciune din Maramureș',
+        'title' => 'Închinare prin rugăciune și cântare',
+        'description' => 'Tabăra Maramureș 2024'
+    ]
+];
+
+$missionSlides = [
+    [
+        'src' => '../images/community/targ1dec-cooks.jpg',
+        'alt' => 'Pregătiri pentru eveniment',
+        'title' => 'Comunitate și slujire',
+        'description' => 'Targul Speranței - 1 Decembrie'
+    ],
+    [
+        'src' => '../images/community/targ1dec-pork-on-tables.jpg',
+        'alt' => 'Mâncare la Targul Speranței',
+        'title' => 'Mâncare pentru trup și suflet',
+        'description' => 'Targul Speranței - 1 Decembrie'
+    ],
+    [
+        'src' => '../images/faith/Walk-With-Jesus-Soldier.jpg',
+        'alt' => 'Soldat cu Isus',
+        'title' => 'Rugăciune și mărturie',
+        'description' => 'Walk With Jesus - 2024'
+    ]
+];
+
+$momentSlides = [
+    ['src' => '../images/travel/maramures-group-photo.jpg', 'alt' => 'Fotografie de grup din Maramureș', 'title' => 'Vișeu', 'description' => 'Tabăra Maramureș 2024'],
+    ['src' => '../images/travel/poland-landscape.jpg', 'alt' => 'Peisaj din Polonia', 'title' => 'Zakopane', 'description' => 'Tabăra Polonia 2025'],
+    ['src' => '../images/travel/poland-city-landscape.jpg', 'alt' => 'Peisaj urban din Polonia', 'title' => 'Kracovia', 'description' => 'Tabăra Polonia 2025'],
+    ['src' => '../images/community/targ1dec-pork-slashed.jpg', 'alt' => 'Preparare pentru Targul Speranței', 'title' => 'Șiștarovăț', 'description' => 'Targul Speranței - 1 Decembrie'],
+    ['src' => '../images/community/targ1dec-Tibi-workshop.jpg', 'alt' => 'Atelier la Targul Speranței', 'title' => '#tineretSperanta - Atelier Tibi', 'description' => 'Targul Speranței - 1 Decembrie']
+];
 ?>
 
 <!DOCTYPE html>
@@ -194,6 +244,42 @@ checkPersistentLogin();
             color: var(--camp-navy);
         }
 
+        .gallery-carousel {
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 18px 35px rgba(16,24,32,0.14);
+            border: 1px solid rgba(16,24,32,0.08);
+            background: #fff;
+        }
+
+        .gallery-carousel .carousel-item img {
+            height: 470px;
+            object-fit: cover;
+        }
+
+        .gallery-carousel .carousel-caption {
+            background: linear-gradient(180deg, rgba(16,24,32,0.1) 0%, rgba(16,24,32,0.8) 100%);
+            border-radius: 16px 16px 0 0;
+            left: 12%;
+            right: 12%;
+            bottom: 12px;
+            padding: 1rem 1.25rem;
+        }
+
+        .gallery-carousel .carousel-control-prev,
+        .gallery-carousel .carousel-control-next {
+            width: 8%;
+            opacity: 0.9;
+        }
+
+        .gallery-carousel .carousel-control-prev-icon,
+        .gallery-carousel .carousel-control-next-icon {
+            background-color: rgba(16,24,32,0.7);
+            border-radius: 50%;
+            padding: 1.5rem;
+            background-size: 50% 50%;
+        }
+
         .site-footer {
             background: linear-gradient(135deg, var(--camp-navy) 0%, var(--camp-navy-2) 50%, var(--camp-red) 100%);
             color: #fff;
@@ -227,7 +313,7 @@ checkPersistentLogin();
     </div>
 </nav>
 
-<header class="hero" style="background-image:url('../images/hero.jpeg');">
+<header class="hero" style="background-image:url('../images/home/hero.jpg');">
     <div class="container text-center">
         <h1 class="display-4 fw-bold">Bun venit ACASĂ!</h1>
         <p class="lead mb-4">#tineretSperanta - comunitatea tinerilor din Biserica Baptistă Speranța Arad</p>
@@ -263,19 +349,106 @@ checkPersistentLogin();
                     <p class="lead">ACASĂ este grupul de tineri al Bisericii Speranța. Ne întâlnim pentru a studia Cuvântul, a ne ruga împreună și a construi relații bazate pe credință și prietenie. Fie că ești nou sau ai fost cu noi de mult timp, ești binevenit.</p>
                 </div>
                 <div class="col-lg-6">
-                    <div class="image-frame">
-                        <img src="../images/stage.jpeg" class="img-fluid" alt="Tineri ACASA">
+                    <div id="aboutCarousel" class="carousel slide gallery-carousel" data-bs-ride="carousel">
+                        <div class="carousel-indicators">
+                            <?php foreach ($aboutSlides as $index => $slide): ?>
+                                <button type="button" data-bs-target="#aboutCarousel" data-bs-slide-to="<?php echo $index; ?>" class="<?php echo $index === 0 ? 'active' : ''; ?>" aria-current="<?php echo $index === 0 ? 'true' : 'false'; ?>" aria-label="Slide <?php echo $index + 1; ?>"></button>
+                            <?php endforeach; ?>
+                        </div>
+                        <div class="carousel-inner">
+                            <?php foreach ($aboutSlides as $index => $slide): ?>
+                                <div class="carousel-item <?php echo $index === 0 ? 'active' : ''; ?>">
+                                    <img src="<?php echo $slide['src']; ?>" class="d-block w-100" alt="<?php echo htmlspecialchars($slide['alt']); ?>">
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <h5><?php echo htmlspecialchars($slide['title']); ?></h5>
+                                        <p><?php echo htmlspecialchars($slide['description']); ?></p>
+                                    </div>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#aboutCarousel" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#aboutCarousel" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
                     </div>
-                    <p class="text-center mt-3 mb-0 fw-bold" style="color: #183153; letter-spacing: 0.04em;">Maramures 2024</p>
                 </div>
             </div>
         </div>
     </section>
 
     <section id="mission" class="py-5">
-        <div class="container text-center">
-            <h2 class="mb-4 section-title"><i class="fas fa-cross me-2"></i>Misiunea noastră</h2>
-            <p class="lead">Ne propunem să creștem spiritual, să fim lumină în comunitate și să încurajăm tinerii să-și trăiască credința dincolo de zidurile bisericii.</p>
+        <div class="container">
+            <div class="text-center mb-4">
+                <h2 class="mb-4 section-title"><i class="fas fa-cross me-2"></i>Misiunea noastră</h2>
+                <p class="lead">Ne propunem să creștem spiritual, să fim lumină în comunitate și să încurajăm tinerii să-și trăiască credința dincolo de zidurile bisericii.</p>
+            </div>
+
+            <div id="missionCarousel" class="carousel slide gallery-carousel" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                    <?php foreach ($missionSlides as $index => $slide): ?>
+                        <button type="button" data-bs-target="#missionCarousel" data-bs-slide-to="<?php echo $index; ?>" class="<?php echo $index === 0 ? 'active' : ''; ?>" aria-current="<?php echo $index === 0 ? 'true' : 'false'; ?>" aria-label="Slide <?php echo $index + 1; ?>"></button>
+                    <?php endforeach; ?>
+                </div>
+                <div class="carousel-inner">
+                    <?php foreach ($missionSlides as $index => $slide): ?>
+                        <div class="carousel-item <?php echo $index === 0 ? 'active' : ''; ?>">
+                            <img src="<?php echo $slide['src']; ?>" class="d-block w-100" alt="<?php echo htmlspecialchars($slide['alt']); ?>">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5><?php echo htmlspecialchars($slide['title']); ?></h5>
+                                <p><?php echo htmlspecialchars($slide['description']); ?></p>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#missionCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#missionCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery" class="py-5 theme-section">
+        <div class="container">
+            <div class="text-center mb-4">
+                <h2 class="mb-3 section-title"><i class="fas fa-images me-2"></i>Momente</h2>
+                <p class="lead">Câteva imagini care ne amintesc de bucuria, rugăciunea și prietenia din timpul nostru împreună.</p>
+            </div>
+
+            <div id="galleryCarousel" class="carousel slide gallery-carousel" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                    <?php foreach ($momentSlides as $index => $slide): ?>
+                        <button type="button" data-bs-target="#galleryCarousel" data-bs-slide-to="<?php echo $index; ?>" class="<?php echo $index === 0 ? 'active' : ''; ?>" aria-current="<?php echo $index === 0 ? 'true' : 'false'; ?>" aria-label="Slide <?php echo $index + 1; ?>"></button>
+                    <?php endforeach; ?>
+                </div>
+                <div class="carousel-inner">
+                    <?php foreach ($momentSlides as $index => $slide): ?>
+                        <div class="carousel-item <?php echo $index === 0 ? 'active' : ''; ?>">
+                            <img src="<?php echo $slide['src']; ?>" class="d-block w-100" alt="<?php echo htmlspecialchars($slide['alt']); ?>">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5><?php echo htmlspecialchars($slide['title']); ?></h5>
+                                <p><?php echo htmlspecialchars($slide['description']); ?></p>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#galleryCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#galleryCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
         </div>
     </section>
 
@@ -299,7 +472,7 @@ checkPersistentLogin();
                 </div>
                 <div class="col-lg-6">
                     <div class="image-frame">
-                        <img src="../images/poland.jpeg" class="img-fluid" alt="Activități ACASA">
+                        <img src="../images/travel/poland-landscape.jpg" class="img-fluid" alt="Activități ACASA">
                     </div>
                     <p class="text-center mt-3 mb-0 fw-bold" style="color: #183153; letter-spacing: 0.04em;">Polonia 2025</p>
                 </div>
@@ -331,7 +504,7 @@ checkPersistentLogin();
                             <div class="card-body text-center text-dark">
                                 <i class="fas fa-sign-in-alt fa-2x text-primary mb-3"></i>
                                 <h5 class="card-title">Autentificare</h5>
-                                <p class="card-text">Ești deja membru? Autentifică-te pentru a trimite citirile biblice și a-ți urmări progresul.</p>
+                                <p class="card-text" style="color: #111111;">Ești deja membru? Autentifică-te pentru a trimite citirile biblice și a-ți urmări progresul.</p>
                                 <a href="/auth/login.php" class="btn btn-primary">Autentifică-te</a>
                             </div>
                         </div>
@@ -342,7 +515,7 @@ checkPersistentLogin();
                             <div class="card-body text-center text-dark">
                                 <i class="fas fa-user-plus fa-2x text-success mb-3"></i>
                                 <h5 class="card-title">Înregistrează-te</h5>
-                                <p class="card-text">Nou aici? Înscrie-te pentru a începe să trimiți reflecțiile biblice și a te alătura grupului.</p>
+                                <p class="card-text" style="color: #111111;">Nou aici? Înscrie-te pentru a începe să trimiți reflecțiile biblice și a te alătura grupului.</p>
                                 <a href="/auth/register.php" class="btn btn-secondary">Înregistrează-te</a>
                             </div>
                         </div>
@@ -353,7 +526,7 @@ checkPersistentLogin();
                             <div class="card-body text-center text-dark">
                                 <i class="fas fa-trophy fa-2x text-warning mb-3"></i>
                                 <h5 class="card-title">Clasament</h5>
-                                <p class="card-text">Cum se află alți utilizatori? Vezi pe cei mai activi pe baza activitatii lor.</p>
+                                <p class="card-text" style="color: #111111;">Cum se află alți utilizatori? Vezi pe cei mai activi pe baza activitatii lor.</p>
                                 <a href="/leaderboard/leaderboard.php" class="btn btn-info">Vezi Clasamentul</a>
                             </div>
                         </div>

@@ -2,6 +2,8 @@
 require_once __DIR__ . '/../core/db.php';
 session_start();
 
+$error = null;
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST['username'];
     $password = $_POST['password'];
@@ -29,10 +31,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             header("Location: /dashboard/dashboard.php");
             exit();
         } else {
-            echo "Parolă incorectă!";
+            $error = "Parolă incorectă!";
         }
     } else {
-        echo "Utilizator inexistent!";
+        $error = "Utilizator inexistent!";
     }
 }
 ?>
@@ -84,6 +86,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <h3>Autentifică-te</h3>
                 </div>
                 <div class="card-body">
+                    <?php if ($error): ?>
+                        <div class="alert alert-danger" role="alert">
+                            <?php echo htmlspecialchars($error); ?>
+                        </div>
+                    <?php endif; ?>
+
                     <form action="/auth/login.php" method="POST">
                         <div class="mb-3">
                             <label for="username" class="form-label">Nume utilizator</label>
